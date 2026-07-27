@@ -6,8 +6,7 @@ public/videos/intro.vtt
 
 3. На странице достаточно оставить:
 <Video
-  videoSrc="/videos/video.mp4"
-  poster="/images/video-poster.webp"
+  videoSrc="https://pub-b2802ad1bb364c4bb4669b666012b25f.r2.dev/video.mp4"
 />
 
 Компонент сам использует /videos/intro.vtt и показывает раскрывающийся SEO-текст под видео.
