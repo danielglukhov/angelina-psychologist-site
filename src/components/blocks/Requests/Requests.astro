@@ -1,0 +1,53 @@
+---
+import Container from '../../ui/Container.astro';
+import Section from '../../ui/Section.astro';
+import SectionHeader from '../../ui/SectionHeader.astro';
+
+interface RequestItem { title: string; text: string; }
+interface Props { id?: string; eyebrow?: string; title?: string; description?: string; items?: RequestItem[]; }
+
+const defaultItems: RequestItem[] = [
+  { title: 'Тревога и напряжение', text: 'Когда сложно расслабиться, мысли возвращаются к плохим сценариям, а контроль только усиливает усталость.' },
+  { title: 'Выгорание и кризис', text: 'Когда прежние цели больше не поддерживают, сил становится меньше, а понять следующий шаг трудно.' },
+  { title: 'Отношения с собой', text: 'Когда самокритика, вина и стремление быть удобным мешают слышать собственные потребности.' },
+  { title: 'Отношения в паре', text: 'Когда конфликты повторяются, близость исчезает и разговор о важном снова заканчивается ссорой.' },
+];
+
+const {
+  id = 'requests',
+  eyebrow = 'Возможно, вам знакомо',
+  title = 'Ситуации, с которыми можно не оставаться один на один',
+  description = 'Необязательно ждать, пока станет совсем тяжело. Обратиться за поддержкой можно уже тогда, когда привычные способы перестают помогать.',
+  items = defaultItems,
+} = Astro.props;
+---
+
+<Section id={id} class="requests-block">
+  <Container>
+    <div class="requests-layout">
+      <SectionHeader eyebrow={eyebrow} title={title} description={description} />
+
+      <div class="requests-grid">
+        {items.map((item, index) => (
+          <article class="request-item">
+            <span class="request-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+            <div>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </Container>
+</Section>
+
+<style>
+  :global(.requests-block) { background: var(--color-background-warm); }
+  .requests-layout { display: grid; grid-template-columns: minmax(22rem, 0.95fr) minmax(0, 1.05fr); gap: clamp(3rem, 6vw, 5rem); align-items: start; }
+  .requests-grid { display: grid; border-top: 1px solid var(--color-border-strong); }
+  .request-item { display: grid; grid-template-columns: 3rem 1fr; gap: var(--space-5); padding-block: var(--space-6); border-bottom: 1px solid var(--color-border); }
+  .request-number { color: var(--color-accent); font-size: var(--font-size-sm); font-weight: var(--font-weight-bold); }
+  .request-item p { margin-top: var(--space-2); color: var(--color-text-secondary); }
+  @media (max-width: 52rem) { .requests-layout { grid-template-columns: 1fr; } }
+</style>

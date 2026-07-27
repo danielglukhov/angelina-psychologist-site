@@ -1,0 +1,628 @@
+---
+import Container from '../../ui/Container.astro';
+import Section from '../../ui/Section.astro';
+import SectionHeader from '../../ui/SectionHeader.astro';
+
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  videoSrc?: string;
+  poster?: string;
+  captionsSrc?: string;
+  captionsLabel?: string;
+  transcriptTitle?: string;
+  transcriptParagraphs?: string[];
+}
+
+const defaultTranscript = [
+  'Приветствую вас на своей странице. Я записала это видео для тех, кто сейчас ищет психолога и хочет познакомиться со мной не только по фотографиям, тексту и описанию услуг, но и увидеть меня в более живом формате.',
+  'Мне важно, чтобы вы могли услышать мой голос, почувствовать мой стиль общения и понять, насколько вам комфортно со мной как со специалистом.',
+  'Я – клинический психолог, работающий в гештальт-подходе. Когда я только начинала обучение, мне казалось, что быть психологом – значит помогать людям «чинить» внутренние проблемы. Спустя годы работы я понимаю, что терапия устроена иначе.',
+  'Для меня терапия – это отношения двух людей и безопасное пространство, которое мы создаём вместе. В нём можно исследовать себя, свои чувства и отношения, а также проживать то, что раньше не получалось прожить в одиночку.',
+  'Я хорошо знаю, каково это – опираться прежде всего на разум, а не на чувства. Знаю, что такое тревога и длительная миграция.',
+  'Если говорить немного более лично, то я домашний интроверт. Люблю рукоделие, компьютерные игры и восточные танцы.',
+  'Если вы чувствуете, что нам по пути, не бойтесь написать мне. Я обязательно отвечу.',
+];
+
+const {
+  eyebrow = 'Видеовизитка',
+  title = 'Познакомимся ближе',
+  description = 'Короткое видео поможет заранее почувствовать мой стиль общения и понять, насколько вам комфортно обратиться ко мне.',
+  videoSrc,
+  poster,
+  captionsSrc = '/videos/intro.vtt',
+  captionsLabel = 'Русские субтитры',
+  transcriptTitle = 'Текст видео',
+  transcriptParagraphs = defaultTranscript,
+} = Astro.props;
+---
+
+<Section class="video-block">
+  <Container>
+    <div class="video-layout">
+      <SectionHeader eyebrow={eyebrow} title={title} description={description} />
+
+      <div class="video-content">
+        <div class="video-player" data-video-player>
+          {videoSrc ? (
+            <div class="video-frame" data-video-frame tabindex="0" aria-label="Видеоплеер">
+              <video data-video playsinline preload="metadata" poster={poster}>
+                <source src={videoSrc} type="video/mp4" />
+                {captionsSrc && (
+                  <track
+                    default
+                    kind="subtitles"
+                    src={captionsSrc}
+                    srclang="ru"
+                    label={captionsLabel}
+                  />
+                )}
+                Ваш браузер не поддерживает воспроизведение видео.
+              </video>
+
+              <button class="center-play" type="button" data-center-play aria-label="Воспроизвести видео">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M9 6.35v11.3L18.4 12 9 6.35Z" fill="currentColor" />
+                </svg>
+              </button>
+
+              <div class="video-controls" data-controls>
+                <input
+                  class="video-progress"
+                  data-progress
+                  type="range"
+                  min="0"
+                  max="100"
+                  value="0"
+                  step="0.1"
+                  aria-label="Позиция воспроизведения"
+                />
+
+                <div class="controls-row">
+                  <button class="control-button" type="button" data-play aria-label="Воспроизвести">
+                    <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M8 5.7v12.6L18.5 12 8 5.7Z" fill="currentColor" />
+                    </svg>
+                    <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M7 5h4v14H7V5Zm6 0h4v14h-4V5Z" fill="currentColor" />
+                    </svg>
+                  </button>
+
+                  <span class="video-time" aria-live="off">
+                    <span data-current-time>0:00</span>
+                    <span aria-hidden="true"> / </span>
+                    <span data-duration>0:00</span>
+                  </span>
+
+                  <div class="controls-spacer"></div>
+
+                  <div class="volume-control" data-volume-control>
+                    <button class="control-button" type="button" data-mute aria-label="Выключить звук">
+                      <svg class="icon-volume" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M4 9v6h4l5 4V5L8 9H4Zm11.5.2a4 4 0 0 1 0 5.6l1.4 1.4a6 6 0 0 0 0-8.4l-1.4 1.4Z" fill="currentColor" />
+                      </svg>
+                      <svg class="icon-muted" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M4 9v6h4l5 4V5L8 9H4Zm11.2.8 1.4-1.4 2 2 2-2 1.4 1.4-2 2 2 2-1.4 1.4-2-2-2 2-1.4-1.4 2-2-2-2Z" fill="currentColor" />
+                      </svg>
+                    </button>
+                    <div class="volume-slider-wrap">
+                      <input
+                        class="volume-slider"
+                        data-volume
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.01"
+                        value="1"
+                        aria-label="Громкость"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="speed-control" data-speed-control>
+                    <button
+                      class="speed-trigger"
+                      type="button"
+                      data-speed-trigger
+                      aria-label="Скорость воспроизведения"
+                      aria-expanded="false"
+                    >
+                      <span data-speed-value>1×</span>
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="m7 10 5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </button>
+
+                    <div class="speed-menu" data-speed-menu hidden>
+                      {[
+                        ['0.5', '0.5×'],
+                        ['0.75', '0.75×'],
+                        ['1', '1×'],
+                        ['1.25', '1.25×'],
+                        ['1.5', '1.5×'],
+                        ['2', '2×'],
+                      ].map(([value, label]) => (
+                        <button
+                          class="speed-option"
+                          type="button"
+                          data-speed-option
+                          data-speed={value}
+                          aria-pressed={value === '1' ? 'true' : 'false'}
+                        >
+                          <span>{label}</span>
+                          <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="m5 12 4 4L19 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {captionsSrc && (
+                    <button
+                      class="control-button captions-button"
+                      type="button"
+                      data-captions
+                      aria-label="Включить субтитры"
+                      aria-pressed="false"
+                      disabled
+                    >
+                      CC
+                    </button>
+                  )}
+
+                  <button class="control-button" type="button" data-fullscreen aria-label="Открыть на весь экран">
+                    <svg class="icon-fullscreen" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M5 5h5v2H7v3H5V5Zm9 0h5v5h-2V7h-3V5ZM5 14h2v3h3v2H5v-5Zm12 0h2v5h-5v-2h3v-3Z" fill="currentColor" />
+                    </svg>
+                    <svg class="icon-exit-fullscreen" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M10 10H5V8h3V5h2v5Zm4 0V5h2v3h3v2h-5Zm-4 4v5H8v-3H5v-2h5Zm4 0h5v2h-3v3h-2v-5Z" fill="currentColor" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div class="video-frame video-frame--placeholder">
+              <div class="video-placeholder">
+                <span class="play" aria-hidden="true">▶</span>
+                <strong>Видео скоро появится</strong>
+                <p>Добавьте файл в <code>public/videos/video.mp4</code>.</p>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {videoSrc && transcriptParagraphs.length > 0 && (
+          <details class="video-transcript">
+            <summary>
+              <span>{transcriptTitle}</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m7 10 5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </summary>
+            <div class="video-transcript__body">
+              {transcriptParagraphs.map((paragraph) => <p>{paragraph}</p>)}
+            </div>
+          </details>
+        )}
+      </div>
+    </div>
+  </Container>
+</Section>
+
+<script>
+  const formatTime = (value: number) => {
+    if (!Number.isFinite(value)) return '0:00';
+    const hours = Math.floor(value / 3600);
+    const minutes = Math.floor((value % 3600) / 60);
+    const seconds = Math.floor(value % 60).toString().padStart(2, '0');
+    return hours > 0 ? `${hours}:${minutes.toString().padStart(2, '0')}:${seconds}` : `${minutes}:${seconds}`;
+  };
+
+  const initVideoPlayers = () => {
+    document.querySelectorAll<HTMLElement>('[data-video-player]').forEach((player) => {
+      if (player.dataset.initialized === 'true') return;
+
+      const frame = player.querySelector<HTMLElement>('[data-video-frame]');
+      const video = player.querySelector<HTMLVideoElement>('[data-video]');
+      if (!frame || !video) return;
+
+      player.dataset.initialized = 'true';
+
+      const playButton = player.querySelector<HTMLButtonElement>('[data-play]');
+      const centerPlay = player.querySelector<HTMLButtonElement>('[data-center-play]');
+      const muteButton = player.querySelector<HTMLButtonElement>('[data-mute]');
+      const volumeSlider = player.querySelector<HTMLInputElement>('[data-volume]');
+      const speedControl = player.querySelector<HTMLElement>('[data-speed-control]');
+      const speedTrigger = player.querySelector<HTMLButtonElement>('[data-speed-trigger]');
+      const speedMenu = player.querySelector<HTMLElement>('[data-speed-menu]');
+      const speedValue = player.querySelector<HTMLElement>('[data-speed-value]');
+      const speedOptions = player.querySelectorAll<HTMLButtonElement>('[data-speed-option]');
+      const captionsButton = player.querySelector<HTMLButtonElement>('[data-captions]');
+      const fullscreenButton = player.querySelector<HTMLButtonElement>('[data-fullscreen]');
+      const progress = player.querySelector<HTMLInputElement>('[data-progress]');
+      const currentTime = player.querySelector<HTMLElement>('[data-current-time]');
+      const duration = player.querySelector<HTMLElement>('[data-duration]');
+      const trackElement = video.querySelector<HTMLTrackElement>('track[kind="subtitles"], track[kind="captions"]');
+      let volumeBeforeMute = 1;
+      let textTrack: TextTrack | null = null;
+      let controlsHideTimer: number | undefined;
+      const controlsHideDelay = 2200;
+
+      const syncVolumeState = () => {
+        const muted = video.muted || video.volume === 0;
+        frame.classList.toggle('is-muted', muted);
+        muteButton?.setAttribute('aria-label', muted ? 'Включить звук' : 'Выключить звук');
+        if (volumeSlider) {
+          volumeSlider.value = String(muted ? 0 : video.volume);
+          volumeSlider.style.setProperty('--volume', `${Number(volumeSlider.value) * 100}%`);
+        }
+      };
+
+      const positionCaptions = (controlsVisible: boolean) => {
+        if (!textTrack?.cues) return;
+        Array.from(textTrack.cues).forEach((cue) => {
+          const vttCue = cue as VTTCue;
+          vttCue.snapToLines = true;
+          vttCue.line = controlsVisible ? -4 : -2;
+          vttCue.position = 50;
+          vttCue.align = 'center';
+          vttCue.size = document.fullscreenElement === frame ? 88 : 94;
+        });
+      };
+
+      const showControls = () => {
+  window.clearTimeout(controlsHideTimer);
+  frame.classList.remove('is-controls-hidden');
+
+  if (frame.dataset.restoreCaptions === 'true' && textTrack) {
+    textTrack.mode = 'showing';
+    delete frame.dataset.restoreCaptions;
+  }
+
+  positionCaptions(true);
+
+  if (!video.paused && !video.ended && !speedControl?.classList.contains('is-open')) {
+    controlsHideTimer = window.setTimeout(() => {
+      if (video.paused || video.ended || speedControl?.classList.contains('is-open')) return;
+
+      frame.classList.add('is-controls-hidden');
+
+      if (document.fullscreenElement === frame && textTrack?.mode === 'showing') {
+        textTrack.mode = 'hidden';
+        frame.dataset.restoreCaptions = 'true';
+      }
+    }, controlsHideDelay);
+  }
+};
+
+      const syncPlayingState = () => {
+        const isPlaying = !video.paused && !video.ended;
+        frame.classList.toggle('is-playing', isPlaying);
+        playButton?.setAttribute('aria-label', isPlaying ? 'Пауза' : 'Воспроизвести');
+        centerPlay?.setAttribute('aria-label', isPlaying ? 'Пауза' : 'Воспроизвести видео');
+        showControls();
+      };
+
+      const togglePlayback = () => {
+        if (video.paused || video.ended) void video.play().catch(() => {});
+        else video.pause();
+      };
+
+      const setCaptions = (show: boolean) => {
+        if (!textTrack || !captionsButton) return;
+        textTrack.mode = show ? 'showing' : 'hidden';
+        captionsButton.setAttribute('aria-pressed', String(show));
+        captionsButton.setAttribute('aria-label', show ? 'Выключить субтитры' : 'Включить субтитры');
+      };
+
+      const enableCaptionsControl = () => {
+        textTrack = Array.from(video.textTracks).find((track) => track.kind === 'subtitles' || track.kind === 'captions') ?? null;
+        if (!textTrack || !captionsButton) return;
+        setCaptions(false);
+        captionsButton.disabled = false;
+        captionsButton.removeAttribute('title');
+        positionCaptions(!frame.classList.contains('is-controls-hidden'));
+      };
+
+      if (trackElement && captionsButton) {
+        trackElement.addEventListener('load', enableCaptionsControl, { once: true });
+        trackElement.addEventListener('error', () => {
+          captionsButton.disabled = true;
+          captionsButton.title = 'Субтитры не загрузились';
+          captionsButton.setAttribute('aria-label', 'Субтитры недоступны');
+        }, { once: true });
+
+        // Some browsers populate textTracks before firing the track load event.
+        queueMicrotask(enableCaptionsControl);
+      }
+
+      playButton?.addEventListener('click', togglePlayback);
+      centerPlay?.addEventListener('click', togglePlayback);
+      video.addEventListener('click', togglePlayback);
+      video.addEventListener('play', syncPlayingState);
+      video.addEventListener('pause', syncPlayingState);
+      video.addEventListener('ended', syncPlayingState);
+
+      video.addEventListener('loadedmetadata', () => {
+        if (duration) duration.textContent = formatTime(video.duration);
+        syncVolumeState();
+        enableCaptionsControl();
+      });
+
+      video.addEventListener('timeupdate', () => {
+        if (currentTime) currentTime.textContent = formatTime(video.currentTime);
+        if (progress && Number.isFinite(video.duration) && video.duration > 0) {
+          progress.value = String((video.currentTime / video.duration) * 100);
+          progress.style.setProperty('--progress', `${progress.value}%`);
+          progress.setAttribute('aria-valuetext', `${formatTime(video.currentTime)} из ${formatTime(video.duration)}`);
+        }
+      });
+
+      progress?.addEventListener('input', () => {
+        if (Number.isFinite(video.duration) && video.duration > 0) {
+          video.currentTime = (Number(progress.value) / 100) * video.duration;
+          progress.style.setProperty('--progress', `${progress.value}%`);
+        }
+      });
+
+      muteButton?.addEventListener('click', () => {
+        if (video.muted || video.volume === 0) {
+          video.muted = false;
+          video.volume = Math.max(volumeBeforeMute, 0.1);
+        } else {
+          volumeBeforeMute = video.volume;
+          video.muted = true;
+        }
+        syncVolumeState();
+      });
+
+      volumeSlider?.addEventListener('input', () => {
+        const nextVolume = Number(volumeSlider.value);
+        video.volume = nextVolume;
+        video.muted = nextVolume === 0;
+        if (nextVolume > 0) volumeBeforeMute = nextVolume;
+        syncVolumeState();
+      });
+      video.addEventListener('volumechange', syncVolumeState);
+
+      ['mousemove', 'pointermove', 'pointerdown', 'touchstart'].forEach((eventName) => {
+        frame.addEventListener(eventName, showControls, { passive: true });
+      });
+      frame.addEventListener('mouseenter', showControls);
+      frame.addEventListener('focusin', showControls);
+      frame.addEventListener('mouseleave', () => {
+        if (!video.paused && !video.ended && !speedControl?.classList.contains('is-open')) {
+          window.clearTimeout(controlsHideTimer);
+          controlsHideTimer = window.setTimeout(() => {
+            frame.classList.add('is-controls-hidden');
+
+            if (document.fullscreenElement === frame && textTrack?.mode === 'showing') {
+              textTrack.mode = 'hidden';
+              frame.dataset.restoreCaptions = 'true';
+            } else {
+              positionCaptions(false);
+            }
+          }, 450);
+        }
+      });
+
+      const closeSpeedMenu = () => {
+        if (!speedMenu) return;
+        speedMenu.hidden = true;
+        speedTrigger?.setAttribute('aria-expanded', 'false');
+        speedControl?.classList.remove('is-open');
+      };
+
+ const toggleSpeedMenu = () => {
+  if (!speedMenu) return;
+
+  const shouldOpen = speedMenu.hasAttribute('hidden');
+
+  speedMenu.hidden = !shouldOpen;
+  speedTrigger?.setAttribute('aria-expanded', String(shouldOpen));
+  speedControl?.classList.toggle('is-open', shouldOpen);
+  showControls();
+};
+
+      speedTrigger?.addEventListener('click', (event) => {
+        event.stopPropagation();
+        toggleSpeedMenu();
+      });
+
+      speedOptions.forEach((option) => {
+        option.addEventListener('click', (event) => {
+          event.stopPropagation();
+          const rate = Number(option.dataset.speed);
+          if (!Number.isFinite(rate)) return;
+          video.playbackRate = rate;
+          if (speedValue) speedValue.textContent = `${rate}×`;
+          speedOptions.forEach((item) => item.setAttribute('aria-pressed', String(item === option)));
+          closeSpeedMenu();
+          speedTrigger?.focus();
+        });
+      });
+
+      captionsButton?.addEventListener('click', () => {
+        if (!textTrack) enableCaptionsControl();
+        if (!textTrack) return;
+        setCaptions(textTrack.mode !== 'showing');
+      });
+
+      fullscreenButton?.addEventListener('click', async () => {
+        try {
+          if (document.fullscreenElement) {
+            await document.exitFullscreen();
+          } else if (frame.requestFullscreen) {
+            await frame.requestFullscreen();
+          } else {
+            const iosVideo = video as HTMLVideoElement & { webkitEnterFullscreen?: () => void };
+            iosVideo.webkitEnterFullscreen?.();
+          }
+        } catch {
+          // Fullscreen can be blocked by the browser or embedding context.
+        } finally {
+          fullscreenButton.blur();
+          frame.focus({ preventScroll: true });
+          showControls();
+        }
+      });
+
+      frame.addEventListener('keydown', (event) => {
+        const target = event.target;
+        if (target instanceof HTMLInputElement || target instanceof HTMLButtonElement) return;
+        if (event.code === 'Space' || event.key.toLowerCase() === 'k') {
+          event.preventDefault();
+          togglePlayback();
+        } else if (event.key.toLowerCase() === 'm') {
+          event.preventDefault();
+          muteButton?.click();
+        } else if (event.key.toLowerCase() === 'c') {
+          event.preventDefault();
+          captionsButton?.click();
+        } else if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          video.currentTime = Math.min(video.duration || Infinity, video.currentTime + 5);
+        } else if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          video.currentTime = Math.max(0, video.currentTime - 5);
+        }
+      });
+
+      player.addEventListener('click', (event) => {
+        if (speedControl && !speedControl.contains(event.target as Node)) closeSpeedMenu();
+      });
+
+      document.addEventListener('fullscreenchange', () => {
+        const isFullscreen = document.fullscreenElement === frame;
+        frame.classList.toggle('is-fullscreen', isFullscreen);
+        fullscreenButton?.setAttribute('aria-label', isFullscreen ? 'Выйти из полноэкранного режима' : 'Открыть на весь экран');
+        positionCaptions(!frame.classList.contains('is-controls-hidden'));
+        showControls();
+      });
+
+      syncPlayingState();
+      syncVolumeState();
+    });
+  };
+
+  initVideoPlayers();
+  document.addEventListener('astro:page-load', initVideoPlayers);
+</script>
+
+<style>
+  :global(.video-block) { background: var(--color-surface); }
+  .video-layout { display: grid; grid-template-columns: minmax(18rem, .72fr) minmax(0, 1.28fr); gap: clamp(3rem, 7vw, 6rem); align-items: center; }
+  .video-content, .video-player { min-width: 0; }
+  .video-frame { position: relative; overflow: hidden; aspect-ratio: 16 / 9; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: #111; color: #fff; box-shadow: var(--shadow-md); }
+  .video-frame--placeholder { display: grid; place-items: center; background: linear-gradient(145deg, var(--color-surface-muted), var(--color-surface-strong)); color: var(--color-text-secondary); }
+  .video-placeholder { display: grid; max-width: 24rem; place-items: center; padding: var(--space-8); text-align: center; }
+  .video-placeholder .play { display: grid; width: 4rem; height: 4rem; place-items: center; margin-bottom: var(--space-5); border-radius: 50%; background: var(--color-accent); color: var(--color-accent-contrast); padding-left: .2rem; }
+  .video-placeholder p { margin-top: var(--space-2); }
+  .video-placeholder code { font-size: .88em; }
+  video { display: block; width: 100%; height: 100%; object-fit: cover; background: var(--color-surface-muted); }
+
+  .center-play { position: absolute; top: 50%; left: 50%; display: grid; width: clamp(3.25rem, 7vw, 4.5rem); height: clamp(3.25rem, 7vw, 4.5rem); place-items: center; padding: 0; transform: translate(-50%, -50%); border: 1px solid rgb(255 255 255 / .5); border-radius: 50%; background: rgb(20 24 21 / .72); color: #fff; backdrop-filter: blur(12px); cursor: pointer; opacity: 0; pointer-events: none; transition: opacity .2s ease, background .2s ease, border-color .2s ease; }
+  .center-play:hover, .center-play:focus-visible { transform: translate(-50%, -50%); border-color: rgb(255 255 255 / .75); background: rgb(20 24 21 / .9); outline: none; }
+  .center-play svg { display: block; width: 42%; height: 42%; transform: translateX(1px); }
+  .video-frame:hover:not(.is-playing) .center-play, .video-frame:focus-within:not(.is-playing) .center-play { opacity: 1; pointer-events: auto; }
+  .video-frame.is-playing .center-play { opacity: 0; pointer-events: none; }
+
+  .video-controls { position: absolute; right: 0; bottom: 0; left: 0; padding: 3rem .85rem .75rem; background: linear-gradient(to top, rgb(0 0 0 / .86), rgb(0 0 0 / 0)); opacity: 1; transform: translateY(0); transition: opacity .22s ease, transform .22s ease, visibility 0s linear .22s; }
+  .video-frame.is-controls-hidden { cursor: none; }
+  .video-frame:not(.is-playing) .video-controls,
+  .video-frame:focus-within:not(.is-controls-hidden) .video-controls {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+    transition-delay: 0s;
+  }
+  .video-frame.is-controls-hidden .video-controls {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(.6rem);
+    pointer-events: none;
+  }
+  .controls-row { display: flex; align-items: center; gap: .38rem; }
+  .controls-spacer { flex: 1; }
+  .control-button { display: grid; width: 2.4rem; height: 2.4rem; place-items: center; flex: 0 0 auto; padding: 0; border: 0; border-radius: .58rem; background: transparent; color: #fff; cursor: pointer; }
+  .control-button:hover, .control-button:focus-visible { background: rgb(255 255 255 / .14); outline: none; }
+  .control-button svg { width: 1.35rem; height: 1.35rem; }
+  .icon-pause, .icon-muted, .icon-exit-fullscreen { display: none; }
+  .video-frame.is-playing .icon-play { display: none; }
+  .video-frame.is-playing .icon-pause { display: block; }
+  .video-frame.is-muted .icon-volume { display: none; }
+  .video-frame.is-muted .icon-muted { display: block; }
+  .video-frame.is-fullscreen .icon-fullscreen { display: none; }
+  .video-frame.is-fullscreen .icon-exit-fullscreen { display: block; }
+
+  .video-time { min-width: 6.3rem; color: rgb(255 255 255 / .92); font-size: .78rem; font-variant-numeric: tabular-nums; }
+
+  .volume-control { display: flex; align-items: center; }
+  .volume-slider-wrap { width: 0; overflow: hidden; opacity: 0; transition: width .2s ease, opacity .15s ease; }
+  .volume-control:hover .volume-slider-wrap, .volume-control:focus-within .volume-slider-wrap { width: 5.4rem; opacity: 1; }
+  .volume-slider { --volume: 100%; width: 4.75rem; height: 1rem; margin: 0 .38rem 0 .05rem; appearance: none; background: transparent; cursor: pointer; }
+  .volume-slider::-webkit-slider-runnable-track { height: .22rem; border-radius: 999px; background: linear-gradient(to right, #fff var(--volume), rgb(255 255 255 / .32) var(--volume)); }
+  .volume-slider::-webkit-slider-thumb { width: .7rem; height: .7rem; margin-top: -.24rem; appearance: none; border: 0; border-radius: 50%; background: #fff; }
+  .volume-slider::-moz-range-track { height: .22rem; border-radius: 999px; background: rgb(255 255 255 / .32); }
+  .volume-slider::-moz-range-progress { height: .22rem; border-radius: 999px; background: #fff; }
+  .volume-slider::-moz-range-thumb { width: .7rem; height: .7rem; border: 0; border-radius: 50%; background: #fff; }
+
+  .speed-control { position: relative; display: inline-flex; flex: 0 0 auto; }
+  .speed-trigger { display: flex; height: 2.4rem; min-width: 4.25rem; align-items: center; justify-content: center; gap: .35rem; padding: 0 .65rem; border: 1px solid rgb(255 255 255 / .12); border-radius: .68rem; background: rgb(17 17 17 / .48); color: #fff; font: inherit; font-size: .8rem; font-weight: 650; cursor: pointer; backdrop-filter: blur(18px); transition: background .18s ease, border-color .18s ease; }
+  .speed-trigger:hover, .speed-trigger:focus-visible, .speed-control.is-open .speed-trigger { border-color: rgb(255 255 255 / .2); background: rgb(17 17 17 / .68); outline: none; }
+  .speed-trigger svg { width: .95rem; height: .95rem; transition: transform .18s ease; }
+  .speed-control.is-open .speed-trigger svg { transform: rotate(180deg); }
+  .speed-menu { position: absolute; right: 0; bottom: calc(100% + .55rem); z-index: 10; width: 7.25rem; padding: .38rem; overflow: hidden; border: 1px solid rgb(255 255 255 / .13); border-radius: .9rem; background: rgb(20 23 21 / .96); box-shadow: 0 1rem 2.5rem rgb(0 0 0 / .32), inset 0 1px rgb(255 255 255 / .05); backdrop-filter: blur(20px); }
+  .speed-menu[hidden] { display: none; }
+  .speed-option { display: flex; width: 100%; min-height: 2.35rem; align-items: center; justify-content: space-between; padding: .45rem .65rem; border: 0; border-radius: .6rem; background: transparent; color: rgb(255 255 255 / .82); font: inherit; font-size: .8rem; font-weight: 550; text-align: left; cursor: pointer; transition: background .15s ease, color .15s ease; }
+  .speed-option:hover, .speed-option:focus-visible { background: rgb(255 255 255 / .09); color: #fff; outline: none; }
+  .speed-option[aria-pressed='true'] { background: rgb(107 133 115 / .42); color: #fff; }
+  .speed-option svg { width: 1rem; height: 1rem; opacity: 0; }
+  .speed-option[aria-pressed='true'] svg { opacity: 1; }
+  .captions-button { width: auto; min-width: 2.4rem; padding: 0 .45rem; font-size: .72rem; font-weight: 700; }
+  .captions-button[aria-pressed='true'] { background: #fff; color: #111; }
+  .captions-button:disabled { opacity: .42; cursor: not-allowed; }
+  video::cue { color: #fff; background: rgb(0 0 0 / .82); font-family: inherit; font-size: clamp(1rem, 1.4vw, 1.25rem); line-height: 1.35; text-shadow: 0 1px 3px rgb(0 0 0 / .95); }
+  .video-frame:fullscreen video::cue,
+  .video-frame.is-fullscreen video::cue { font-size: clamp(1.65rem, 2.35vw, 2.6rem); line-height: 1.3; background: rgb(0 0 0 / .86); }
+
+  .video-progress { --progress: 0%; width: 100%; height: 1rem; margin: 0 0 .15rem; appearance: none; background: transparent; cursor: pointer; }
+  .video-progress::-webkit-slider-runnable-track { height: .25rem; border-radius: 999px; background: linear-gradient(to right, #fff var(--progress), rgb(255 255 255 / .34) var(--progress)); transition: height .15s ease; }
+  .video-progress:hover::-webkit-slider-runnable-track { height: .34rem; }
+  .video-progress::-webkit-slider-thumb { width: .82rem; height: .82rem; margin-top: -.285rem; appearance: none; border: 0; border-radius: 50%; background: #fff; opacity: 0; transition: opacity .15s ease; }
+  .video-progress:hover::-webkit-slider-thumb, .video-progress:focus-visible::-webkit-slider-thumb { opacity: 1; }
+  .video-progress::-moz-range-track { height: .25rem; border-radius: 999px; background: rgb(255 255 255 / .34); }
+  .video-progress::-moz-range-progress { height: .25rem; border-radius: 999px; background: #fff; }
+  .video-progress::-moz-range-thumb { width: .82rem; height: .82rem; border: 0; border-radius: 50%; background: #fff; }
+
+  .video-transcript { margin-top: 1rem; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); }
+  .video-transcript summary { display: flex; min-height: 3.5rem; align-items: center; justify-content: space-between; gap: 1rem; padding: .9rem 1rem; color: var(--color-text-primary); font-weight: 650; cursor: pointer; list-style: none; }
+  .video-transcript summary::-webkit-details-marker { display: none; }
+  .video-transcript summary:hover { color: var(--color-accent); }
+  .video-transcript summary svg { width: 1.1rem; height: 1.1rem; flex: 0 0 auto; transition: transform .2s ease; }
+  .video-transcript[open] summary svg { transform: rotate(180deg); }
+  .video-transcript__body { padding: 0 1rem 1.15rem; color: var(--color-text-secondary); }
+  .video-transcript__body p { margin: 0; }
+  .video-transcript__body p + p { margin-top: .85rem; }
+
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+  .video-frame:fullscreen { width: 100%; height: 100%; border: 0; border-radius: 0; }
+  .video-frame:fullscreen video { object-fit: contain; background: #000; }
+
+  @media (max-width: 52rem) { .video-layout { grid-template-columns: 1fr; } }
+  @media (max-width: 40rem) {
+    .volume-slider-wrap { display: none; }
+  }
+  @media (max-width: 30rem) {
+    .video-controls { padding-inline: .55rem; }
+    .video-time { min-width: 5.55rem; font-size: .7rem; }
+    .control-button { width: 2.1rem; height: 2.1rem; }
+    .speed-trigger { height: 2.1rem; min-width: 3.65rem; padding-inline: .45rem; font-size: .72rem; }
+    .speed-menu { right: -.25rem; width: 6.75rem; }
+    .captions-button { min-width: 2.1rem; }
+  }
+</style>

@@ -1,0 +1,191 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../config/site';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('blog', ({ data }) => !data.draft))
+    .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+
+  return posts.map((post, index) => ({
+    params: { id: post.id },
+    props: {
+      post,
+      previousPost: posts[index - 1] ?? null,
+      nextPost: posts[index + 1] ?? null,
+    },
+  }));
+}
+
+const { post, previousPost, nextPost } = Astro.props;
+const { Content, headings } = await render(post);
+const formattedDate = post.data.publishedAt.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+const formattedUpdatedDate = post.data.updatedAt?.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+const toc = headings.filter((heading) => heading.depth === 2);
+---
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  image={post.data.image}
+  imageAlt={post.data.title}
+  type="article"
+  publishedAt={post.data.publishedAt}
+  updatedAt={post.data.updatedAt ?? post.data.publishedAt}
+>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.data.title,
+    description: post.data.description,
+    datePublished: post.data.publishedAt.toISOString(),
+    dateModified: (post.data.updatedAt ?? post.data.publishedAt).toISOString(),
+    author: { '@type': 'Person', '@id': `${new URL('/', Astro.site).href}#person`, name: SITE.name },
+    publisher: {
+      '@type': 'Person',
+      '@id': `${new URL('/', Astro.site).href}#person`,
+      name: SITE.name,
+      logo: { '@type': 'ImageObject', url: new URL(SITE.icon, Astro.site).href },
+    },
+    mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).href,
+    image: post.data.image ? new URL(post.data.image, Astro.site).href : new URL(SITE.defaultOgImage, Astro.site).href,
+    inLanguage: SITE.language,
+  })} />
+  <article>
+    <header class="article-hero section">
+      <div class="container article-hero__inner">
+        <div class="article-hero__topline">
+          <a class="article-back" href="/blog/">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H5M9 6l-4 4 4 4" /></svg>
+            <span>Все статьи</span>
+          </a>
+          <span class="article-category">{post.data.category}</span>
+        </div>
+        <h1>{post.data.title}</h1>
+        <p class="article-lead">{post.data.description}</p>
+        <div class="article-meta">
+          <time datetime={post.data.publishedAt.toISOString()}>{formattedDate}</time>
+          <span aria-hidden="true">·</span>
+          <span>{post.data.readingTime}</span>
+          {formattedUpdatedDate && (<>
+            <span aria-hidden="true">·</span>
+            <span>Обновлено {formattedUpdatedDate}</span>
+          </>)}
+        </div>
+      </div>
+    </header>
+
+    <section class="article-section section">
+      <div class="container article-layout">
+        {toc.length > 1 && (
+          <aside class="article-toc" aria-label="Содержание статьи">
+            <span>В этой статье</span>
+            <nav>
+              {toc.map((heading) => <a href={`#${heading.slug}`}>{heading.text}</a>)}
+            </nav>
+          </aside>
+        )}
+
+        <div class="article-content prose">
+          <Content />
+
+          <aside class="article-note">
+            <strong>Важно</strong>
+            <p>Статья носит информационный характер и не заменяет индивидуальную консультацию, диагностику или медицинскую помощь.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="article-cta section">
+      <div class="container article-cta__box">
+        <div>
+          <span class="eyebrow">Консультация</span>
+          <h2>Необязательно справляться со всем в одиночку</h2>
+          <p>На встрече можно спокойно разобраться в том, что происходит, без давления и необходимости заранее формулировать идеальный запрос.</p>
+        </div>
+        <a class="button" href="/start">Записаться</a>
+      </div>
+    </section>
+
+    {(previousPost || nextPost) && (
+      <nav class="article-pagination section" aria-label="Другие статьи">
+        <div class="container article-pagination__grid">
+          {previousPost ? (
+            <a href={`/blog/${previousPost.id}/`}>
+              <span class="article-pagination__label">
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 10H5M9 6l-4 4 4 4" /></svg>
+                Предыдущая статья
+              </span>
+              <strong>{previousPost.data.title}</strong>
+            </a>
+          ) : <span></span>}
+          {nextPost && (
+            <a class="article-pagination__next" href={`/blog/${nextPost.id}/`}>
+              <span class="article-pagination__label">
+                Следующая статья
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 6l4 4-4 4" /></svg>
+              </span>
+              <strong>{nextPost.data.title}</strong>
+            </a>
+          )}
+        </div>
+      </nav>
+    )}
+  </article>
+</BaseLayout>
+
+<style>
+  .article-hero { padding-top: clamp(3.25rem, 5vw, 5rem); padding-bottom: clamp(4rem, 6vw, 6rem); background: var(--color-surface-muted); }
+  .article-hero__inner { max-width: 57rem; }
+  .article-hero__topline { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; margin-bottom: clamp(2.25rem, 4vw, 3.75rem); }
+  .article-back { display: inline-flex; align-items: center; gap: .5rem; flex: 0 0 auto; color: var(--color-text-secondary); font-weight: var(--font-weight-semibold); text-decoration: none; }
+  .article-back:hover { color: var(--color-accent); }
+  .article-back svg { width: 1.1rem; height: 1.1rem; }
+  .article-back path { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .article-category { display: inline-block; color: var(--color-accent); font-size: var(--font-size-xs); font-weight: var(--font-weight-extrabold); letter-spacing: .14em; text-align: right; text-transform: uppercase; }
+  .article-hero h1 { max-width: 56rem; margin-top: var(--space-4); font-size: clamp(2.6rem, 5vw, 4.7rem); }
+  .article-lead { max-width: 48rem; margin-top: var(--space-6); color: var(--color-text-secondary); font-size: clamp(1.12rem, 1.45vw, 1.32rem); line-height: 1.65; }
+  .article-meta { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: var(--space-8); color: var(--color-text-muted); font-size: var(--font-size-sm); }
+  .article-layout { display: grid; grid-template-columns: 15rem minmax(0, 44rem); gap: clamp(3rem, 7vw, 7rem); align-items: start; justify-content: center; }
+  .article-toc { position: sticky; top: calc(var(--header-height) + 2rem); padding-top: .35rem; }
+  .article-toc > span { color: var(--color-text-muted); font-size: var(--font-size-xs); font-weight: var(--font-weight-extrabold); letter-spacing: .12em; text-transform: uppercase; }
+  .article-toc nav { display: grid; gap: .85rem; margin-top: var(--space-5); }
+  .article-toc a { color: var(--color-text-secondary); font-size: var(--font-size-sm); line-height: 1.45; }
+  .article-toc a:hover { color: var(--color-accent); }
+  .article-content { max-width: 44rem; }
+  .article-content :global(h2) { scroll-margin-top: calc(var(--header-height) + 2rem); margin-top: 4rem; font-size: clamp(1.75rem, 3vw, 2.45rem); }
+  .article-content :global(h2:first-child) { margin-top: 0; }
+  .article-content :global(h3) { margin-top: 2.8rem; font-size: clamp(1.3rem, 2vw, 1.65rem); }
+  .article-content :global(p), .article-content :global(li) { color: #3e433d; font-size: clamp(1.03rem, 1.15vw, 1.12rem); line-height: 1.82; }
+  .article-content :global(strong) { color: var(--color-text-primary); }
+  .article-content :global(blockquote) { margin: 2.2rem 0; padding: 1.5rem 1.7rem; border-left: .25rem solid var(--color-accent); border-radius: 0 var(--radius-lg) var(--radius-lg) 0; background: var(--color-surface-muted); }
+  .article-content :global(blockquote p) { margin: 0; color: var(--color-text-primary); font-size: 1.08rem; }
+  .article-note { margin-top: 4rem; padding: 1.5rem 1.7rem; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-background-warm); }
+  .article-note strong { color: var(--color-accent); }
+  .article-note p { margin-top: .4rem; color: var(--color-text-secondary); }
+  .article-cta { background: var(--color-background-warm); }
+  .article-cta__box { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: clamp(2rem, 6vw, 6rem); align-items: center; padding: clamp(2rem, 5vw, 4rem); border: 1px solid var(--color-border); border-radius: 1.5rem; background: var(--color-surface); box-shadow: var(--shadow-sm); }
+  .article-cta h2 { max-width: 43rem; margin-top: var(--space-4); }
+  .article-cta p { max-width: 42rem; margin-top: var(--space-5); color: var(--color-text-secondary); }
+  .article-pagination { padding-top: 0; padding-bottom: clamp(5rem, 9vw, 8rem); }
+  .article-pagination__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); }
+  .article-pagination a { display: flex; min-height: 9rem; flex-direction: column; justify-content: space-between; gap: 2rem; padding: 1.5rem; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); text-decoration: none; transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease; }
+  .article-pagination a:hover { border-color: var(--color-accent); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+  .article-pagination__label { display: inline-flex; align-items: center; gap: .45rem; color: var(--color-text-muted); font-size: var(--font-size-sm); }
+  .article-pagination__label svg { width: 1rem; height: 1rem; flex: 0 0 auto; }
+  .article-pagination__label path { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .article-pagination strong { max-width: 28rem; color: var(--color-text-primary); font-size: 1.15rem; line-height: 1.4; }
+  .article-pagination__next { align-items: flex-end; text-align: right; }
+  .article-pagination__next .article-pagination__label { justify-content: flex-end; }
+  @media (max-width: 62rem) {
+    .article-layout { grid-template-columns: 1fr; }
+    .article-toc { position: static; max-width: 44rem; padding: 1.4rem; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); }
+  }
+  @media (max-width: 46rem) {
+    .article-cta__box, .article-pagination__grid { grid-template-columns: 1fr; }
+    .article-hero__topline { align-items: flex-start; }
+    .article-category { max-width: 50%; }
+    .article-cta__box .button { width: 100%; }
+    .article-pagination__next { text-align: left; }
+  }
+</style>

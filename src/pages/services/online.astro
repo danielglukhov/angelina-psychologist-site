@@ -1,0 +1,648 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../../components/ui/Button.astro';
+import Container from '../../components/ui/Container.astro';
+import Section from '../../components/ui/Section.astro';
+import ContactCTA from '../../components/blocks/ContactCTA/ContactCTA.astro';
+
+const benefits = [
+  {
+    title: 'Из любой страны',
+    text: 'Онлайн-формат подходит русскоговорящим взрослым, которые живут в разных странах и хотят работать на привычном языке.',
+  },
+  {
+    title: 'Без времени на дорогу',
+    text: 'Для встречи достаточно тихого места, стабильного интернета и 50 минут, которые вы можете посвятить себе.',
+  },
+  {
+    title: 'Знакомый формат связи',
+    text: 'Встречи проходят в Zoom, Google Meet, Telegram или другой удобной платформе по договорённости.',
+  },
+  {
+    title: 'Конфиденциальный разговор',
+    text: 'Важно выбрать пространство, где вас не будут отвлекать и где можно спокойно говорить о личном.',
+  },
+];
+
+const requests = [
+  {
+    title: 'Кризисы и перемены',
+    text: 'Миграция, расставание, измена, увольнение, болезнь, утрата и другие периоды, когда привычные опоры перестают работать.',
+  },
+  {
+    title: 'Тревога и контроль',
+    text: 'Постоянное напряжение, тревожные сценарии, страх ошибок и ощущение, что всё нужно держать под контролем.',
+  },
+  {
+    title: 'Выгорание и карьера',
+    text: 'Усталость, потеря интереса к работе, профессиональный кризис, трудности со сменой деятельности или поиском нового места.',
+  },
+  {
+    title: 'Стресс, апатия и раздражение',
+    text: 'Ощущение натянутой струны, нехватка сил, эмоциональная перегрузка и раздражение по мелочам.',
+  },
+  {
+    title: 'Самооценка и самокритика',
+    text: 'Чувство вины и стыда, стремление быть удобным, зависимость от чужой оценки и трудность замечать собственные потребности.',
+  },
+  {
+    title: 'Перфекционизм',
+    text: 'Бесконечная гонка за результатом, страх сделать недостаточно хорошо и неудовлетворённость собой даже после достижений.',
+  },
+  {
+    title: 'Самоопределение и выбор',
+    text: 'Слишком много «надо», сложно понять собственные желания, принять решение или выбрать направление дальнейшей жизни.',
+  },
+  {
+    title: 'Отношения',
+    text: 'Конфликты с близкими, сложности с границами, повторяющиеся сценарии в паре, близость и сексуальная сфера.',
+  },
+];
+
+const process = [
+  {
+    number: '01',
+    title: 'Вы пишете',
+    text: 'Достаточно нескольких слов о том, что сейчас происходит. Идеально сформулированный запрос не нужен.',
+  },
+  {
+    number: '02',
+    title: 'Выбираем время и платформу',
+    text: 'Договариваемся о дате и удобном сервисе: Zoom, Google Meet, Telegram или другом варианте.',
+  },
+  {
+    number: '03',
+    title: 'Встречаемся на 50 минут',
+    text: 'Знакомимся, обсуждаем ситуацию и определяем, на чём важно сосредоточиться в первую очередь.',
+  },
+  {
+    number: '04',
+    title: 'Решаем, как продолжать',
+    text: 'После встречи можно договориться о следующей сессии или о серии встреч. Решение принимается без давления.',
+  },
+];
+
+const faq = [
+  {
+    question: 'Нужно ли заранее формулировать запрос?',
+    answer: 'Нет. Можно прийти с ощущением, что что-то не так, но пока сложно объяснить это точнее. На первой встрече мы вместе проясним, что сейчас важно.',
+  },
+  {
+    question: 'Можно ли подключиться с телефона?',
+    answer: 'Можно, если интернет стабилен, телефон установлен неподвижно, а вы находитесь в тихом месте и можете свободно разговаривать.',
+  },
+  {
+    question: 'Обязательно ли включать камеру?',
+    answer: 'Да. Видеосвязь необходима для живого контакта и полноценной работы во время консультации.',
+  },
+  {
+    question: 'Как часто проходят встречи?',
+    answer: 'Работа начинается с одной ознакомительной сессии. Дальше можно договариваться о каждой следующей встрече отдельно или заранее согласовать серию сессий.',
+  },
+  {
+    question: 'Как оплачивается консультация?',
+    answer: 'Оплата возможна переводом на Halyk Bank, Kaspi, Bank of Georgia или Сбербанк. Подходящий вариант согласуем при записи.',
+  },
+  {
+    question: 'Как перенести или отменить встречу?',
+    answer: 'Условия переноса и отмены будут согласованы при записи. Точный срок бесплатного переноса сейчас уточняется.',
+  },
+];
+---
+
+<BaseLayout
+  title="Онлайн-консультации психолога – 50 минут, $51"
+  description="Онлайн-консультации клинического психолога Ангелины Глуховой для русскоговорящих взрослых по всему миру. Zoom, Google Meet или Telegram. 50 минут, стоимость $51."
+>
+  <Section class="online-hero">
+    <Container>
+      <div class="online-hero__grid">
+        <div class="online-hero__copy">
+          <span class="eyebrow">Онлайн по всему миру</span>
+          <h1>Психологическая поддержка на русском языке, где бы вы ни жили</h1>
+          <p class="lead">
+            Онлайн-консультации для взрослых 18+: тревога, выгорание,
+            жизненные перемены, самооценка и трудности в отношениях.
+          </p>
+
+          <div class="actions">
+            <Button href="/start">
+              Записаться
+            </Button>
+            <Button href="#process" variant="ghost">Как проходит встреча</Button>
+          </div>
+
+          <p class="online-hero__note">
+            Русскоговорящие клиенты из разных стран · Камера включена · Конфиденциально
+          </p>
+        </div>
+
+        <aside class="online-facts" aria-label="Условия онлайн-консультации">
+          <div>
+            <span>Стоимость</span>
+            <strong>$51</strong>
+          </div>
+          <div>
+            <span>Длительность</span>
+            <strong>50 минут</strong>
+          </div>
+          <div>
+            <span>Возраст</span>
+            <strong>18+</strong>
+          </div>
+          <div>
+            <span>Платформы</span>
+            <strong>Zoom · Meet · Telegram</strong>
+          </div>
+        </aside>
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="section-intro">
+        <span class="eyebrow">Почему онлайн</span>
+        <h2>Терапия остаётся живым диалогом, даже когда между нами расстояние</h2>
+        <p class="lead">
+          Онлайн-формат помогает сохранить регулярность встреч после переезда,
+          в поездках или при плотном графике.
+        </p>
+      </div>
+
+      <div class="benefits-grid">
+        {benefits.map((benefit, index) => (
+          <article class="benefit-card">
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <h3>{benefit.title}</h3>
+            <p>{benefit.text}</p>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section class="requests-section">
+    <Container>
+      <div class="section-intro section-intro--wide">
+        <span class="eyebrow">С чем можно обратиться</span>
+        <h2>Необязательно ждать, пока справляться станет совсем трудно</h2>
+        <p class="lead">
+          Ниже – основные темы, с которыми можно прийти. Это не закрытый список:
+          если вы сомневаетесь, подходит ли ваш запрос, можно коротко описать его в сообщении.
+        </p>
+      </div>
+
+      <div class="requests-grid">
+        {requests.map((request) => (
+          <article class="request-card">
+            <h3>{request.title}</h3>
+            <p>{request.text}</p>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="process">
+    <Container>
+      <div class="process-layout">
+        <div class="process-heading">
+          <span class="eyebrow">Первая встреча</span>
+          <h2>Как начинается онлайн-работа</h2>
+          <p class="lead">
+            Первая консультация – это знакомство. После неё не нужно сразу
+            принимать решение о длительной терапии.
+          </p>
+        </div>
+
+        <ol class="process-list">
+          {process.map((step) => (
+            <li>
+              <span class="process-list__number">{step.number}</span>
+              <div>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </Container>
+  </Section>
+
+  <Section class="organization-section">
+    <Container>
+      <div class="section-intro">
+        <span class="eyebrow">Организационные условия</span>
+        <h2>Всё важное до первой встречи</h2>
+      </div>
+
+      <div class="organization-grid">
+        <article>
+          <span>01</span>
+          <h3>Платформа</h3>
+          <p>Zoom, Google Meet, Telegram или другой удобный сервис по договорённости.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>Камера</h3>
+          <p>Камера должна быть включена: визуальный контакт важен для полноценной работы.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>Оплата</h3>
+          <p>Halyk Bank, Kaspi, Bank of Georgia или Сбербанк. Способ согласуем при записи.</p>
+        </article>
+        <article>
+          <span>04</span>
+          <h3>Следующая встреча</h3>
+          <p>Можно договариваться после каждой сессии или заранее оплатить согласованную серию встреч.</p>
+        </article>
+        <article>
+          <span>05</span>
+          <h3>Перенос и отмена</h3>
+          <p>Условия сообщаются при записи. Точный срок бесплатного переноса сейчас уточняется.</p>
+        </article>
+        <article>
+          <span>06</span>
+          <h3>Пространство</h3>
+          <p>Нужно тихое место, стабильный интернет и возможность говорить без посторонних.</p>
+        </article>
+      </div>
+    </Container>
+  </Section>
+
+  <Section class="boundaries-section">
+    <Container>
+      <div class="boundaries-layout">
+        <div>
+          <span class="eyebrow">Границы практики</span>
+          <h2>Когда лучше обратиться к профильному специалисту</h2>
+          <p class="lead">
+            Честно обозначить границы компетенций – часть безопасной и профессиональной работы.
+          </p>
+        </div>
+
+        <div class="boundaries-card">
+          <ul>
+            <li>Возраст младше 18 лет.</li>
+            <li>Выраженные клинические состояния, требующие специализированного лечения: БАР, ОКР, ПРЛ, шизофрения.</li>
+            <li>Депрессивное состояние без наблюдения и лечения у психиатра.</li>
+            <li>Химические зависимости.</li>
+            <li>Острые психотические состояния и суицидальные намерения.</li>
+          </ul>
+          <p>
+            В острых и угрожающих жизни состояниях необходима срочная помощь
+            профильной медицинской или экстренной службы, а не плановая онлайн-консультация.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="faq-layout">
+        <div>
+          <span class="eyebrow">Частые вопросы</span>
+          <h2>Что важно знать об онлайн-встрече</h2>
+        </div>
+
+        <div class="online-faq">
+          {faq.map((item) => (
+            <details>
+              <summary>{item.question}<span aria-hidden="true"></span></summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <ContactCTA
+    eyebrow="Онлайн-запись"
+    title="Можно начать с одной встречи"
+    description="Напишите в Telegram или WhatsApp. Достаточно нескольких слов о вашей ситуации – дальше мы выберем удобное время и платформу."
+  />
+</BaseLayout>
+
+<style>
+  :global(.online-hero) {
+    padding-top: clamp(3rem, 6vw, 5.5rem);
+    background:
+      radial-gradient(circle at 82% 20%, color-mix(in srgb, var(--color-accent-soft) 70%, transparent), transparent 30%),
+      linear-gradient(180deg, var(--color-background), color-mix(in srgb, var(--color-accent-soft) 22%, var(--color-background)));
+  }
+
+  .online-hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(20rem, 0.65fr);
+    gap: clamp(3rem, 7vw, 6rem);
+    align-items: center;
+  }
+
+  .online-hero__copy {
+    min-width: 0;
+  }
+
+  .online-hero__copy h1 {
+    max-width: 49rem;
+    margin-top: var(--space-5);
+  }
+
+  .online-hero__note {
+    margin-top: var(--space-6);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+  }
+
+  .online-facts {
+    display: grid;
+    gap: 0;
+    padding: var(--space-6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    background: color-mix(in srgb, var(--color-surface) 95%, transparent);
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(10px);
+  }
+
+  .online-facts div {
+    display: grid;
+    gap: var(--space-1);
+    padding-block: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .online-facts div:first-child {
+    padding-top: 0;
+  }
+
+  .online-facts div:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .online-facts span,
+  .benefit-card > span,
+  .organization-grid article > span {
+    color: var(--color-accent);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-extrabold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .online-facts strong {
+    font-size: var(--font-size-lg);
+  }
+
+  .section-intro {
+    max-width: 48rem;
+  }
+
+  .section-intro h2 {
+    margin-top: var(--space-4);
+  }
+
+  .section-intro--wide {
+    max-width: 55rem;
+  }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-5);
+    margin-top: var(--space-10);
+  }
+
+  .benefit-card {
+    min-width: 0;
+    padding: var(--space-6);
+    border-top: 1px solid var(--color-border-strong);
+  }
+
+  .benefit-card h3 {
+    margin-top: var(--space-5);
+  }
+
+  .benefit-card p,
+  .request-card p,
+  .organization-grid p,
+  .process-list p {
+    margin-top: var(--space-3);
+    color: var(--color-text-secondary);
+  }
+
+  :global(.requests-section),
+  :global(.organization-section) {
+    background: var(--color-background-warm);
+  }
+
+  .requests-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-10);
+  }
+
+  .request-card {
+    padding: clamp(1.5rem, 3vw, 2rem);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .process-layout,
+  .boundaries-layout,
+  .faq-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+    gap: clamp(3rem, 7vw, 6rem);
+    align-items: start;
+  }
+
+  .process-heading h2,
+  .boundaries-layout h2,
+  .faq-layout h2 {
+    margin-top: var(--space-4);
+  }
+
+  .process-list {
+    border-top: 1px solid var(--color-border-strong);
+  }
+
+  .process-list li {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr);
+    gap: var(--space-5);
+    padding-block: var(--space-6);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .process-list__number {
+    color: var(--color-accent);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-extrabold);
+  }
+
+  .organization-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-10);
+  }
+
+  .organization-grid article {
+    min-width: 0;
+    padding: var(--space-6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+  }
+
+  .organization-grid h3 {
+    margin-top: var(--space-4);
+  }
+
+  :global(.boundaries-section) {
+    background: color-mix(in srgb, var(--color-accent-soft) 36%, var(--color-background));
+  }
+
+  .boundaries-card {
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .boundaries-card ul {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .boundaries-card li {
+    position: relative;
+    padding-left: 1.75rem;
+    color: var(--color-text-primary);
+  }
+
+  .boundaries-card li::before {
+    position: absolute;
+    top: 0.68em;
+    left: 0;
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--color-accent);
+    content: '';
+  }
+
+  .boundaries-card > p {
+    margin-top: var(--space-6);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+  }
+
+  .online-faq {
+    border-top: 1px solid var(--color-border-strong);
+  }
+
+  .online-faq details {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .online-faq summary {
+    position: relative;
+    display: flex;
+    min-height: 4.75rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-5);
+    padding-block: var(--space-5);
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .online-faq summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .online-faq summary span {
+    position: relative;
+    width: 1.75rem;
+    height: 1.75rem;
+    flex: 0 0 1.75rem;
+    border: 1px solid var(--color-border-strong);
+    border-radius: 50%;
+  }
+
+  .online-faq summary span::before,
+  .online-faq summary span::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.7rem;
+    height: 1.5px;
+    background: var(--color-accent);
+    content: '';
+    transform: translate(-50%, -50%);
+  }
+
+  .online-faq summary span::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+    transition: opacity var(--duration-fast);
+  }
+
+  .online-faq details[open] summary span::after {
+    opacity: 0;
+  }
+
+  .online-faq details > p {
+    max-width: 42rem;
+    padding: 0 3.5rem var(--space-6) 0;
+    color: var(--color-text-secondary);
+  }
+
+  @media (max-width: 62rem) {
+    .benefits-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .organization-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 52rem) {
+    .online-hero__grid,
+    .process-layout,
+    .boundaries-layout,
+    .faq-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .requests-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 38rem) {
+    .benefits-grid,
+    .organization-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .benefit-card {
+      padding-inline: 0;
+    }
+  }
+</style>

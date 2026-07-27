@@ -1,0 +1,544 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../../components/ui/Button.astro';
+import Container from '../../components/ui/Container.astro';
+import Section from '../../components/ui/Section.astro';
+import ContactCTA from '../../components/blocks/ContactCTA/ContactCTA.astro';
+import LocationMap from '../../components/blocks/LocationMap.astro';
+
+const requests = [
+  {
+    title: 'Постоянные конфликты',
+    text: 'Разговоры быстро превращаются в спор, одни и те же темы возвращаются, а договориться становится всё сложнее.',
+  },
+  {
+    title: 'Потеря доверия',
+    text: 'Подозрения, ревность, скрытность или последствия измены мешают снова чувствовать близость и безопасность.',
+  },
+  {
+    title: 'Эмоциональная дистанция',
+    text: 'Вы всё ещё вместе, но между вами стало меньше тепла, поддержки, интереса и настоящего контакта.',
+  },
+  {
+    title: 'Интимные трудности',
+    text: 'Различия в желаниях, снижение близости, напряжение и невозможность спокойно говорить о сексуальной сфере.',
+  },
+  {
+    title: 'Перемены в жизни пары',
+    text: 'Переезд, рождение ребёнка, новая работа или другой кризис изменили привычные роли и нагрузку в отношениях.',
+  },
+  {
+    title: 'Важное решение',
+    text: 'Подготовка к браку, размышления о расставании или желание понять, возможно ли сохранить отношения.',
+  },
+];
+
+const process = [
+  {
+    number: '01',
+    title: 'Знакомимся с вашей историей',
+    text: 'На первой встрече каждый партнёр может рассказать, как видит ситуацию и что считает самым важным сейчас.',
+  },
+  {
+    number: '02',
+    title: 'Определяем общую задачу',
+    text: 'Формулируем цель, с которой согласны оба: восстановить диалог, разобраться в кризисе или принять решение.',
+  },
+  {
+    number: '03',
+    title: 'Исследуем привычный сценарий',
+    text: 'Разбираем, как возникает напряжение, что делает каждый участник и почему разговор снова приходит к тупику.',
+  },
+  {
+    number: '04',
+    title: 'Пробуем новые способы общения',
+    text: 'Работаем над тем, чтобы слышать друг друга, яснее говорить о потребностях и по-другому проходить конфликты.',
+  },
+];
+
+const faq = [
+  {
+    question: 'Обязательно ли приходить вдвоём?',
+    answer: 'Да. Парная консультация строится вокруг совместной работы, поэтому участие обоих партнёров необходимо.',
+  },
+  {
+    question: 'Можно ли обратиться без официального брака?',
+    answer: 'Да. Семейный статус не имеет значения – обратиться могут пары, которые состоят в отношениях и хотят работать над ними.',
+  },
+  {
+    question: 'Работаете ли вы с ЛГБТ-парами?',
+    answer: 'Да. В работе важны отношения, трудности и цели пары, а не её формальный состав.',
+  },
+  {
+    question: 'Возможны ли отдельные встречи?',
+    answer: 'При необходимости возможны отдельные встречи с каждым партнёром. Их роль и границы заранее обсуждаются вместе.',
+  },
+  {
+    question: 'Как часто проходят консультации?',
+    answer: 'Частоту встреч обсуждаем после первой консультации с учётом ситуации, целей пары и возможностей обоих партнёров.',
+  },
+  {
+    question: 'Как перенести или отменить встречу?',
+    answer: 'Условия переноса и отмены согласовываются при записи. Точный срок бесплатного переноса сейчас уточняется.',
+  },
+];
+---
+
+<BaseLayout
+  title="Психолог для пар в Батуми – 80 минут, $103"
+  description="Очные консультации психолога для пар в Батуми. Работа с конфликтами, потерей доверия, эмоциональной дистанцией и кризисами в отношениях. 80 минут, стоимость $103."
+>
+  <Section class="couples-hero">
+    <Container>
+      <div class="couples-hero__grid">
+        <div class="couples-hero__copy">
+          <span class="eyebrow">Парная терапия в Батуми</span>
+          <h1>Пространство, где можно снова услышать друг друга</h1>
+          <p class="lead">
+            Помогаю парам разобраться в накопившихся конфликтах, восстановить
+            доверие и выстроить более спокойный и честный диалог.
+          </p>
+
+          <div class="actions">
+            <Button href="/start">
+              Записаться
+            </Button>
+            <Button href="#process" variant="ghost">Как проходит работа</Button>
+          </div>
+
+          <p class="couples-hero__note">
+            Для супругов и партнёров · ЛГБТ-френдли · Конфиденциально
+          </p>
+        </div>
+
+        <aside class="couples-facts" aria-label="Условия консультации для пар">
+          <div>
+            <span>Стоимость</span>
+            <strong>$103</strong>
+          </div>
+          <div>
+            <span>Длительность</span>
+            <strong>80 минут</strong>
+          </div>
+          <div>
+            <span>Формат</span>
+            <strong>Очно в Батуми</strong>
+          </div>
+          <div>
+            <span>Место</span>
+            <strong>Психологический центр Unbox</strong>
+          </div>
+        </aside>
+      </div>
+    </Container>
+  </Section>
+
+  <Section class="requests-section">
+    <Container>
+      <div class="section-intro section-intro--wide">
+        <span class="eyebrow">Когда стоит обратиться</span>
+        <h2>Парная терапия нужна не только тогда, когда отношения уже на грани</h2>
+        <p class="lead">
+          Можно прийти, когда вы замечаете повторяющийся тупик, хотите лучше
+          понимать друг друга или пройти важный период не в одиночку.
+        </p>
+      </div>
+
+      <div class="requests-grid">
+        {requests.map((request) => (
+          <article class="request-card">
+            <h3>{request.title}</h3>
+            <p>{request.text}</p>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="process">
+    <Container>
+      <div class="process-layout">
+        <div class="process-heading">
+          <span class="eyebrow">Совместная работа</span>
+          <h2>Как проходит консультация для пары</h2>
+          <p class="lead">
+            Я не определяю, кто прав, а кто виноват. Задача терапии – увидеть
+            общую динамику отношений и помочь каждому партнёру быть услышанным.
+          </p>
+        </div>
+
+        <ol class="process-list">
+          {process.map((step) => (
+            <li>
+              <span class="process-list__number">{step.number}</span>
+              <div>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </Container>
+  </Section>
+
+  <Section class="principles-section">
+    <Container>
+      <div class="principles-card">
+        <div>
+          <span class="eyebrow">Принцип работы</span>
+          <h2>Без поиска виноватого</h2>
+        </div>
+        <blockquote>
+          «Моя задача – создать безопасное пространство, где каждый сможет
+          говорить открыто, быть услышанным и вместе искать другой способ
+          строить отношения».
+        </blockquote>
+      </div>
+    </Container>
+  </Section>
+
+  <Section class="organization-section">
+    <Container>
+      <div class="section-intro">
+        <span class="eyebrow">Организационные условия</span>
+        <h2>Что важно знать до первой встречи</h2>
+      </div>
+
+      <div class="organization-grid">
+        <article>
+          <span>01</span>
+          <h3>Оба партнёра участвуют</h3>
+          <p>Парная консультация проходит совместно. Отдельные встречи возможны только при необходимости и по предварительной договорённости.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>Формальный статус не важен</h3>
+          <p>Обратиться могут супруги и пары без официального брака. Я также работаю с ЛГБТ-парами.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>Оплата</h3>
+          <p>Оплатить встречу можно банковским переводом на доступные счета или наличными в кабинете.</p>
+        </article>
+        <article>
+          <span>04</span>
+          <h3>Частота встреч</h3>
+          <p>После первой консультации вместе решаем, нужен ли следующий визит и какой ритм работы будет подходящим.</p>
+        </article>
+      </div>
+    </Container>
+  </Section>
+
+  <Section class="limits-section">
+    <Container>
+      <div class="limits-grid">
+        <div>
+          <span class="eyebrow">Границы практики</span>
+          <h2>Когда парная терапия может быть не лучшим первым шагом</h2>
+        </div>
+        <div class="limits-copy">
+          <p>
+            Я не работаю с несовершеннолетними, острыми психиатрическими
+            состояниями, зависимостями без лечения и ситуациями, где требуется
+            экстренная специализированная помощь.
+          </p>
+          <p>
+            Если один из партнёров находится в непосредственной опасности,
+            сначала важно обеспечить безопасность и обратиться за профильной
+            помощью. При необходимости помогу сориентироваться, какой специалист нужен.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section class="faq-section">
+    <Container>
+      <div class="faq-layout">
+        <div>
+          <span class="eyebrow">Частые вопросы</span>
+          <h2>Перед первой встречей</h2>
+        </div>
+
+        <div class="faq-list">
+          {faq.map((item) => (
+            <details>
+              <summary>{item.question}</summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="location" class="location-section">
+    <Container>
+      <LocationMap />
+    </Container>
+  </Section>
+
+  <ContactCTA />
+</BaseLayout>
+
+<style>
+  :global(.couples-hero) {
+    padding-top: clamp(3rem, 6vw, 5.5rem);
+    background: linear-gradient(
+      180deg,
+      var(--color-background),
+      color-mix(in srgb, var(--color-accent-soft) 24%, var(--color-background))
+    );
+  }
+
+  .couples-hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(20rem, 0.65fr);
+    gap: clamp(3rem, 7vw, 6rem);
+    align-items: center;
+  }
+
+  .couples-hero__copy h1 {
+    max-width: 13ch;
+  }
+
+  .couples-hero__note {
+    margin-top: var(--space-4);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+  }
+
+  .couples-facts {
+    display: grid;
+    gap: var(--space-3);
+    padding: var(--space-6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-md);
+  }
+
+  .couples-facts div {
+    display: grid;
+    gap: var(--space-1);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .couples-facts div:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .couples-facts span,
+  .organization-grid article > span {
+    color: var(--color-accent);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .couples-facts strong {
+    font-size: var(--font-size-lg);
+  }
+
+  :global(.requests-section),
+  :global(.organization-section),
+  :global(.location-section) {
+    background: var(--color-background-warm);
+  }
+
+  .section-intro {
+    max-width: 48rem;
+    margin-bottom: clamp(2rem, 5vw, 4rem);
+  }
+
+  .section-intro--wide {
+    max-width: 56rem;
+  }
+
+  .requests-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+
+  .request-card,
+  .organization-grid article {
+    padding: var(--space-6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+  }
+
+  .request-card h3,
+  .organization-grid h3 {
+    margin-bottom: var(--space-3);
+  }
+
+  .request-card p,
+  .organization-grid p,
+  .process-list p,
+  .limits-copy,
+  .faq-list p {
+    color: var(--color-text-secondary);
+  }
+
+  .process-layout,
+  .limits-grid,
+  .faq-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(3rem, 7vw, 6rem);
+    align-items: start;
+  }
+
+  .process-heading {
+    position: sticky;
+    top: 7rem;
+  }
+
+  .process-list {
+    display: grid;
+    gap: 0;
+    list-style: none;
+  }
+
+  .process-list li {
+    display: grid;
+    grid-template-columns: 3.25rem 1fr;
+    gap: var(--space-4);
+    padding: var(--space-5) 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .process-list li:last-child {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .process-list__number {
+    color: var(--color-accent);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .process-list h3 {
+    margin-bottom: var(--space-2);
+  }
+
+  :global(.principles-section) {
+    padding-top: 0;
+  }
+
+  .principles-card {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    padding: clamp(2rem, 6vw, 4.5rem);
+    border-radius: var(--radius-xl);
+    background: var(--color-accent);
+    color: var(--color-on-accent, #fff);
+  }
+
+  .principles-card .eyebrow {
+    color: inherit;
+    opacity: 0.72;
+  }
+
+  .principles-card blockquote {
+    margin: 0;
+    font-size: clamp(1.35rem, 2.4vw, 2rem);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.35;
+  }
+
+  .organization-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+
+  .organization-grid article > span {
+    display: block;
+    margin-bottom: var(--space-4);
+  }
+
+  .limits-copy p + p {
+    margin-top: var(--space-5);
+  }
+
+  .faq-list {
+    border-top: 1px solid var(--color-border-strong);
+  }
+
+  .faq-list details {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq-list summary {
+    position: relative;
+    padding: var(--space-5) 3rem var(--space-5) 0;
+    cursor: pointer;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    list-style: none;
+  }
+
+  .faq-list summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-list summary::after {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    content: '+';
+    color: var(--color-accent);
+    font-size: 1.5rem;
+    transform: translateY(-50%);
+  }
+
+  .faq-list details[open] summary::after {
+    content: '−';
+  }
+
+  .faq-list p {
+    max-width: 42rem;
+    padding: 0 3rem var(--space-5) 0;
+  }
+
+  @media (max-width: 64rem) {
+    .requests-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 52rem) {
+    .couples-hero__grid,
+    .process-layout,
+    .limits-grid,
+    .faq-layout,
+    .principles-card {
+      grid-template-columns: 1fr;
+    }
+
+    .process-heading {
+      position: static;
+    }
+  }
+
+  @media (max-width: 40rem) {
+    .requests-grid,
+    .organization-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .couples-facts,
+    .request-card,
+    .organization-grid article {
+      padding: var(--space-5);
+    }
+  }
+</style>

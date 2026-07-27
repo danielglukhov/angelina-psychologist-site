@@ -1,0 +1,91 @@
+---
+import Container from '../../ui/Container.astro';
+import Section from '../../ui/Section.astro';
+import SectionHeader from '../../ui/SectionHeader.astro';
+
+interface FaqItem { question: string; answer: string; }
+interface Props { eyebrow?: string; title?: string; description?: string; items?: FaqItem[]; }
+
+const defaultItems: FaqItem[] = [
+  { question: 'Как проходит первая встреча?', answer: 'Мы знакомимся, обсуждаем, что сейчас происходит и какой помощи вы ожидаете. В конце встречи можно решить, подходит ли вам мой стиль работы и хотите ли вы продолжать.' },
+  { question: 'Нужно ли заранее формулировать запрос?', answer: 'Нет. Достаточно рассказать, что сейчас беспокоит или чего хотелось бы изменить. Запрос можно уточнять постепенно уже в процессе терапии.' },
+  { question: 'Сколько длится консультация?', answer: 'Продолжительность и стоимость зависят от формата работы. Актуальные условия указаны на страницах услуг и уточняются до первой встречи.' },
+  { question: 'Можно ли обратиться парой?', answer: 'Да. Для работы с отношениями предусмотрен отдельный формат консультаций для пар.' },
+];
+
+const {
+  eyebrow = 'Частые вопросы',
+  title = 'Что важно знать до первой встречи',
+  description = 'Ниже – ответы на вопросы, которые чаще всего возникают перед обращением.',
+  items = defaultItems,
+} = Astro.props;
+---
+
+<Section class="faq-block">
+  <Container>
+    <div class="faq-layout">
+      <SectionHeader eyebrow={eyebrow} title={title} description={description} />
+
+      <div class="faq-list">
+        {items.map((item) => (
+          <details class="faq-item">
+            <summary><span class="faq-question">{item.question}</span><span class="faq-toggle" aria-hidden="true"></span></summary>
+            <div class="faq-answer"><p>{item.answer}</p></div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </Container>
+</Section>
+
+<style>
+  :global(.faq-block) { background: var(--color-background-warm); }
+  .faq-layout { display: grid; grid-template-columns: minmax(18rem, .75fr) minmax(0, 1.25fr); gap: clamp(3rem, 7vw, 6rem); align-items: start; }
+  .faq-list { border-top: 1px solid var(--color-border-strong); }
+  .faq-item { border-bottom: 1px solid var(--color-border); }
+  summary {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 2rem;
+    gap: var(--space-5);
+    align-items: center;
+    padding-block: var(--space-6);
+    cursor: pointer;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    list-style: none;
+  }
+  summary::-webkit-details-marker { display: none; }
+  .faq-question { min-width: 0; }
+  .faq-toggle {
+    position: relative;
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid var(--color-border-strong);
+    border-radius: 50%;
+  }
+  .faq-toggle::before,
+  .faq-toggle::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.75rem;
+    height: 1.5px;
+    border-radius: 1px;
+    background: var(--color-accent);
+    content: '';
+    transform: translate(-50%, -50%);
+  }
+  .faq-toggle::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+    transition: transform var(--duration-fast) var(--easing-standard), opacity var(--duration-fast) var(--easing-standard);
+  }
+  details[open] .faq-toggle::after {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  .faq-answer { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--duration-normal) var(--easing-standard); }
+  details[open] .faq-answer { grid-template-rows: 1fr; }
+  .faq-answer p { min-height: 0; overflow: hidden; padding: 0 calc(2rem + var(--space-5)) var(--space-6) 0; color: var(--color-text-secondary); }
+  @media (max-width: 52rem) { .faq-layout { grid-template-columns: 1fr; } }
+</style>

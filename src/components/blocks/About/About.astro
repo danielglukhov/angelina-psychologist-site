@@ -1,0 +1,142 @@
+---
+import Button from '../../ui/Button.astro';
+import Container from '../../ui/Container.astro';
+import Section from '../../ui/Section.astro';
+import SectionHeader from '../../ui/SectionHeader.astro';
+
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  quote?: string;
+  href?: string;
+  linkLabel?: string;
+  imageSrc?: string;
+  imageAlt?: string;
+}
+
+const {
+  eyebrow = 'О специалисте',
+  title = 'Ангелина Глухова',
+  description = 'Клинический психолог и гештальт-терапевт. В работе для меня важны бережность, профессиональные границы, честный диалог без оценки и создание безопасного пространства, где можно быть собой.',
+  quote = 'Терапия – это не про советы и оценки, а про поиск собственных опор, понимание себя и возможность проживать жизнь более свободно и осознанно.',
+  href = '/about',
+  linkLabel = 'Подробнее обо мне',
+  imageSrc = '/images/about.png',
+  imageAlt = 'Ангелина Глухова, клинический психолог и гештальт-терапевт',
+} = Astro.props;
+---
+
+<Section class="about-block">
+  <Container>
+    <div class="about-grid">
+      <figure class="about-photo">
+        <img
+          src={imageSrc}
+          alt={imageAlt}
+          width="1000"
+          height="1250"
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
+
+      <div class="about-content">
+        <SectionHeader
+          eyebrow={eyebrow}
+          title={title}
+        />
+
+        <p class="lead">
+          {description}
+        </p>
+
+        <blockquote class="about-quote">
+          <p>{quote}</p>
+        </blockquote>
+
+        <div class="actions">
+          <Button href={href} variant="ghost">
+            {linkLabel}
+          </Button>
+        </div>
+      </div>
+    </div>
+  </Container>
+</Section>
+
+<style>
+  :global(.about-block) {
+    background: var(--color-surface);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: minmax(20rem, 26rem) minmax(0, 1fr);
+    gap: clamp(3rem, 6vw, 5rem);
+    align-items: center;
+  }
+
+  .about-photo {
+    width: min(100%, 26rem);
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    margin: 0;
+    justify-self: start;
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-muted);
+    box-shadow: var(--shadow-md);
+  }
+
+  .about-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 28%;
+  }
+
+  .about-content {
+    min-width: 0;
+    max-width: 40rem;
+  }
+
+  .about-content .lead {
+    margin-top: var(--space-6);
+  }
+
+  .about-quote {
+    max-width: 37rem;
+    margin: var(--space-8) 0 0;
+    padding-left: var(--space-5);
+    border-left: 2px solid var(--color-accent);
+  }
+
+  .about-quote p {
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1.75;
+  }
+
+  .actions {
+    margin-top: var(--space-8);
+  }
+
+  @media (max-width: 52rem) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-10);
+    }
+
+    .about-photo {
+      width: min(100%, 26rem);
+      justify-self: center;
+    }
+
+    .about-content {
+      max-width: none;
+    }
+  }
+</style>

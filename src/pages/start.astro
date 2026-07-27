@@ -1,0 +1,450 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import Container from '../components/ui/Container.astro';
+import Section from '../components/ui/Section.astro';
+import { SITE } from '../config/site';
+
+const steps = [
+  {
+    number: '01',
+    title: 'Вы пишете мне',
+    text: 'Можно начать буквально с нескольких слов: какой формат вам нужен и что сейчас больше всего беспокоит.',
+  },
+  {
+    number: '02',
+    title: 'Я отвечаю в течение суток',
+    text: 'Уточню важные организационные детали и отвечу на вопросы о формате работы.',
+  },
+  {
+    number: '03',
+    title: 'Мы договариваемся о времени',
+    text: 'Выбираем удобную дату и формат: онлайн или очно в Батуми.',
+  },
+  {
+    number: '04',
+    title: 'Получаете детали встречи',
+    text: 'Для онлайн-консультации я отправляю ссылку на видеовстречу. Для очной – адрес и ориентиры.',
+  },
+  {
+    number: '05',
+    title: 'Встречаемся',
+    text: 'На первой консультации знакомимся, обсуждаем запрос и решаем, подходит ли вам дальнейшая работа.',
+  },
+];
+
+const questions = [
+  {
+    question: 'Нужно ли подробно описывать ситуацию в первом сообщении?',
+    answer:
+      'Нет. Достаточно нескольких слов. Подробности можно обсудить уже на консультации.',
+  },
+  {
+    question: 'Нужно ли заранее готовиться к первой встрече?',
+    answer:
+      'Специальная подготовка не нужна. Можно прийти с тем, что сейчас волнует или вызывает вопросы.',
+  },
+  {
+    question: 'Обязывает ли первая консультация продолжать терапию?',
+    answer:
+      'Нет. После встречи вы сможете спокойно решить, подходит ли вам специалист и формат работы.',
+  },
+  {
+    question: 'Как проходит онлайн-консультация?',
+    answer:
+      'Вы получаете ссылку на видеовстречу и подключаетесь в согласованное время из спокойного места, где вас не будут отвлекать.',
+  },
+];
+---
+
+<BaseLayout
+  title="Как записаться на консультацию"
+  description="Пять понятных шагов записи на консультацию к психологу Ангелине Глуховой: сообщение, ответ, выбор времени, детали встречи и первая консультация."
+>
+  <Section class="start-hero">
+    <Container>
+      <div class="start-intro">
+        <span class="eyebrow">Запись без неизвестности</span>
+
+        <h1>Что происходит дальше?</h1>
+
+        <p class="lead">
+          Запись не обязывает сразу подробно рассказывать о себе. Сначала –
+          короткое сообщение, затем спокойно договариваемся об удобном формате
+          и времени.
+        </p>
+      </div>
+
+      <ol class="steps" aria-label="Этапы записи на консультацию">
+        {steps.map((step) => (
+          <li class="step">
+            <span class="step__number" aria-hidden="true">{step.number}</span>
+
+            <div class="step__content">
+              <h2>{step.title}</h2>
+              <p>{step.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <div class="contact-panel">
+        <div class="contact-panel__copy">
+          <span class="eyebrow">Выберите удобный способ</span>
+
+          <h2>Можно написать прямо сейчас</h2>
+
+          <p>
+            В первом сообщении достаточно написать: «Здравствуйте, хочу
+            записаться на консультацию».
+          </p>
+        </div>
+
+        <div class="contact-panel__actions">
+          <Button
+            href={SITE.telegram}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Написать в Telegram
+          </Button>
+
+          <Button
+            href={SITE.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="ghost"
+          >
+            Написать в WhatsApp
+          </Button>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section class="start-faq">
+    <Container>
+      <div class="faq-layout">
+        <div class="faq-heading">
+          <span class="eyebrow">Перед первым сообщением</span>
+          <h2>Частые вопросы</h2>
+        </div>
+
+        <div class="faq-list">
+          {questions.map((item) => (
+            <details>
+              <summary>{item.question}</summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  :global(.start-hero) {
+    padding-top: clamp(3.5rem, 7vw, 6rem);
+    background:
+      radial-gradient(
+        circle at 85% 10%,
+        var(--color-accent-soft),
+        transparent 28rem
+      ),
+      var(--color-background);
+  }
+
+  .start-intro {
+    max-width: 50rem;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .start-intro h1 {
+    margin-top: var(--space-5);
+  }
+
+  .start-intro .lead {
+    margin-inline: auto;
+  }
+
+  .steps {
+    display: grid;
+    max-width: 54rem;
+    gap: var(--space-4);
+    margin: clamp(3rem, 7vw, 5rem) auto 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .step {
+    position: relative;
+    display: grid;
+    grid-template-columns: 3.25rem minmax(0, 1fr);
+    gap: clamp(1.15rem, 2vw, 1.5rem);
+    align-items: start;
+    padding: clamp(1.45rem, 2.8vw, 2rem);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: color-mix(
+      in srgb,
+      var(--color-surface) 96%,
+      transparent
+    );
+    box-shadow: var(--shadow-sm);
+  }
+
+  .step:not(:last-child)::after {
+    position: absolute;
+    bottom: calc(var(--space-4) * -1);
+    left: calc(clamp(1.45rem, 2.8vw, 2rem) + 1.625rem);
+    width: 1px;
+    height: var(--space-4);
+    background: var(--color-border-strong);
+    content: '';
+  }
+
+  .step__number {
+    display: grid;
+    width: 3.25rem;
+    height: 3.25rem;
+    place-items: center;
+    align-self: start;
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+    font-size: 0.82rem;
+    font-weight: var(--font-weight-bold);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    box-shadow: 0 0 0 0.35rem color-mix(
+      in srgb,
+      var(--color-accent-soft) 75%,
+      transparent
+    );
+  }
+
+  .step__content {
+    min-width: 0;
+    padding-top: 0.08rem;
+  }
+
+  .step h2 {
+    max-width: none;
+    margin: 0;
+    font-size: clamp(1.28rem, 2vw, 1.65rem);
+    line-height: 1.18;
+    letter-spacing: -0.025em;
+  }
+
+  .step p {
+    max-width: 42rem;
+    margin-top: 0.5rem;
+    color: var(--color-text-secondary);
+    font-size: clamp(0.98rem, 1.2vw, 1.08rem);
+    line-height: 1.55;
+  }
+
+  .contact-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+    max-width: 62rem;
+    margin: clamp(3rem, 7vw, 5rem) auto 0;
+    padding: clamp(2rem, 5vw, 3.5rem);
+    border-radius: var(--radius-xl);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .contact-panel__copy {
+    min-width: 0;
+  }
+
+  .contact-panel .eyebrow,
+  .contact-panel p {
+    color: inherit;
+    opacity: 0.82;
+  }
+
+  .contact-panel h2 {
+    margin-top: var(--space-3);
+  }
+
+  .contact-panel p {
+    max-width: 38rem;
+    margin-top: var(--space-4);
+  }
+
+  .contact-panel__actions {
+    display: grid;
+    min-width: 15rem;
+    gap: var(--space-3);
+  }
+
+  .contact-panel__actions :global(.button) {
+    width: 100%;
+    border-color: var(--color-background);
+    background: var(--color-background);
+    color: var(--color-text-primary);
+  }
+
+  .contact-panel__actions :global(.button:hover) {
+    border-color: var(--color-background-warm);
+    background: var(--color-background-warm);
+  }
+
+  .contact-panel__actions :global(.button--ghost) {
+    border-color: rgb(255 255 255 / 0.55);
+    background: transparent;
+    color: var(--color-accent-contrast);
+  }
+
+  .contact-panel__actions :global(.button--ghost:hover) {
+    border-color: #fff;
+    background: rgb(255 255 255 / 0.12);
+    color: #fff;
+  }
+
+  :global(.start-faq) {
+    background: var(--color-background-warm);
+  }
+
+  .faq-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+    gap: clamp(3rem, 7vw, 6rem);
+    align-items: start;
+  }
+
+  .faq-heading h2 {
+    margin-top: var(--space-5);
+  }
+
+  .faq-list {
+    border-top: 1px solid var(--color-border-strong);
+  }
+
+  .faq-list details {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq-list summary {
+    position: relative;
+    padding: var(--space-5) 3rem var(--space-5) 0;
+    cursor: pointer;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    list-style: none;
+  }
+
+  .faq-list summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-list summary::after {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    color: var(--color-accent);
+    font-size: 1.5rem;
+    content: '+';
+    transform: translateY(-50%);
+  }
+
+  .faq-list details[open] summary::after {
+    content: '−';
+  }
+
+  .faq-list p {
+    max-width: 42rem;
+    padding: 0 3rem var(--space-5) 0;
+    color: var(--color-text-secondary);
+  }
+
+  @media (hover: hover) {
+    .step {
+      transition:
+        border-color var(--duration-normal) var(--easing-standard),
+        box-shadow var(--duration-normal) var(--easing-standard),
+        transform var(--duration-normal) var(--easing-standard);
+    }
+
+    .step:hover {
+      border-color: var(--color-border-strong);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+  }
+
+  @media (max-width: 48rem) {
+    .contact-panel,
+    .faq-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-panel__actions {
+      min-width: 0;
+    }
+  }
+
+  @media (max-width: 35rem) {
+    .start-intro {
+      text-align: left;
+    }
+
+    .start-intro .lead {
+      margin-inline: 0;
+    }
+
+    .step {
+      grid-template-columns: 2.75rem minmax(0, 1fr);
+      gap: var(--space-4);
+      padding: var(--space-5);
+    }
+
+    .step__number {
+      width: 2.75rem;
+      height: 2.75rem;
+      font-size: 0.76rem;
+      box-shadow: 0 0 0 0.25rem color-mix(
+        in srgb,
+        var(--color-accent-soft) 75%,
+        transparent
+      );
+    }
+
+    .step:not(:last-child)::after {
+      left: calc(var(--space-5) + 1.375rem);
+    }
+
+    .step h2 {
+      font-size: clamp(1.2rem, 6vw, 1.45rem);
+    }
+
+    .step p {
+      font-size: 0.98rem;
+      line-height: 1.5;
+    }
+
+    .contact-panel {
+      padding: var(--space-6);
+      border-radius: var(--radius-lg);
+    }
+
+    .contact-panel__actions :global(.button) {
+      width: 100%;
+    }
+
+    .faq-list summary {
+      padding-right: 2.5rem;
+    }
+
+    .faq-list p {
+      padding-right: 0;
+    }
+  }
+</style>

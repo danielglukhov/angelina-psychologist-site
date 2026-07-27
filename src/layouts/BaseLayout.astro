@@ -1,0 +1,120 @@
+---
+import '../styles/tokens.css';
+import '../styles/reset.css';
+import '../styles/global.css';
+
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Seo from '../components/Seo.astro';
+import { SITE } from '../config/site';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  imageAlt?: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+  publishedAt?: Date;
+  updatedAt?: Date;
+}
+
+const props = Astro.props;
+const currentUrl = new URL(Astro.url.pathname, Astro.site).href;
+const homeUrl = new URL('/', Astro.site).href;
+const logoUrl = new URL(SITE.icon, Astro.site).href;
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': `${homeUrl}#person`,
+  name: SITE.name,
+  jobTitle: 'Клинический психолог и гештальт-терапевт',
+  knowsAbout: ['психотерапия', 'гештальт-терапия', 'тревога', 'выгорание', 'отношения', 'адаптация после переезда'],
+  description: SITE.description,
+  url: homeUrl,
+  image: logoUrl,
+  email: `mailto:${SITE.email}`,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: SITE.location.city,
+    addressCountry: SITE.location.countryCode,
+  },
+  areaServed: [
+    { '@type': 'City', name: SITE.location.city },
+    { '@type': 'AdministrativeArea', name: 'Онлайн по всему миру' },
+  ],
+  sameAs: [SITE.telegram, SITE.b17],
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${homeUrl}#website`,
+  url: homeUrl,
+  name: SITE.shortTitle,
+  description: SITE.description,
+  inLanguage: SITE.language,
+  publisher: { '@id': `${homeUrl}#person` },
+};
+
+const breadcrumbNames: Record<string, string> = {
+  services: 'Услуги',
+  online: 'Онлайн-консультации',
+  batumi: 'Очные консультации в Батуми',
+  couples: 'Консультации для пар',
+  about: 'Об Ангелине',
+  blog: 'Публикации',
+  contacts: 'Контакты',
+  start: 'Как записаться',
+};
+
+const breadcrumbItems = Astro.url.pathname
+  .split('/')
+  .filter(Boolean)
+  .map((segment, index, segments) => ({
+    '@type': 'ListItem',
+    position: index + 2,
+    name: breadcrumbNames[segment] ?? decodeURIComponent(segment).replaceAll('-', ' '),
+    item: new URL(`/${segments.slice(0, index + 1).join('/')}/`, Astro.site).href,
+  }));
+
+const breadcrumbSchema = breadcrumbItems.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Главная', item: homeUrl },
+    ...breadcrumbItems,
+  ],
+} : null;
+---
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#F4F1EA" />
+    <meta name="color-scheme" content="light" />
+    <meta name="generator" content={Astro.generator} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <Seo {...props} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+    {breadcrumbSchema && (
+      <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    )}
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Перейти к содержанию</a>
+    <Header />
+    <main id="main-content"><slot /></main>
+    <Footer />
+  </body>
+</html>

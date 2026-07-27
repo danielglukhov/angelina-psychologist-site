@@ -1,0 +1,594 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactCta from '../components/ContactCta.astro';
+
+const certificates = [
+  {
+    src: '/images/certificates/clinical-psychology-diploma.webp',
+    title: 'Диплом специалиста по клинической психологии',
+    meta: 'Томский государственный университет · диплом с отличием · 2021',
+    group: 'Основное образование',
+  },
+  {
+    src: '/images/certificates/gestalt-mgi-stage-1.webp',
+    title: 'Первая ступень Московского Гештальт Института',
+    meta: '180 часов · 2019–2020',
+    group: 'Гештальт-подход',
+  },
+  {
+    src: '/images/certificates/gestalt-therapy-theory-and-practice.webp',
+    title: 'Теория и практика гештальт-терапии',
+    meta: 'Московский Гештальт Институт · 600 часов · 2021–2024',
+    group: 'Гештальт-подход',
+  },
+  {
+    src: '/images/certificates/gestalt-couples-and-families-specialization.webp',
+    title: 'Системный подход в гештальт-терапии пар и семей',
+    meta: 'Специализация МГИ · 180 часов · 2022–2023',
+    group: 'Работа с парами',
+  },
+  {
+    src: '/images/certificates/metafora-men-women-relationships.webp',
+    title: 'Женско-мужские отношения: эффективная практика консультирования',
+    meta: 'Центр «Метафора» · 16 академических часов · 2023',
+    group: 'Дополнительное обучение',
+  },
+  {
+    src: '/images/certificates/metafora-childhood-trauma.webp',
+    title: 'Работа с последствиями детских и подростковых травм у взрослых',
+    meta: 'Центр «Метафора» · 3 академических часа · 2021',
+    group: 'Дополнительное обучение',
+  },
+  {
+    src: '/images/certificates/gestalt-conference-shame-2024.webp',
+    title: 'Голос стыда в межличностном взаимодействии',
+    meta: 'Гештальт-конференция · 2024',
+    group: 'Профессиональное развитие',
+  },
+];
+---
+<BaseLayout
+  title="Об Ангелине – клиническом психологе и гештальт-терапевте"
+  description="Ангелина Глухова – клинический психолог и гештальт-терапевт с опытом консультирования более 6 лет. Образование, подход, специализация и сертификаты."
+  image="/images/about.png"
+>
+  <section class="about-hero section">
+    <div class="container about-hero__grid">
+      <div class="about-hero__content">
+        <span class="eyebrow">О специалисте</span>
+        <h1>Ангелина Глухова</h1>
+        <p class="about-hero__lead">
+          Клинический психолог и гештальт-терапевт. Более 6 лет консультирую взрослых и пары – очно в Батуми и онлайн по всему миру.
+        </p>
+        <div class="about-stats" aria-label="Профессиональный опыт">
+          <div><strong>6+</strong><span>лет практики</span></div>
+          <div><strong>600+</strong><span>часов гештальт-подготовки</span></div>
+          <div><strong>180</strong><span>часов специализации по работе с парами</span></div>
+        </div>
+      </div>
+      <figure class="about-portrait">
+        <img src="/images/about.png" alt="Клинический психолог Ангелина Глухова" width="1200" height="1200" />
+      </figure>
+    </div>
+  </section>
+
+  <section class="section section--warm">
+    <div class="container intro-grid">
+      <div>
+        <span class="eyebrow">Обо мне</span>
+        <h2>Терапия без готовых рецептов</h2>
+      </div>
+      <div class="intro-copy">
+        <p>Я работаю со взрослыми людьми и парами, которые сталкиваются с тревогой, эмоциональным выгоранием, жизненными кризисами, трудностями в отношениях, самооценкой и последствиями сложного прошлого.</p>
+        <p>Для меня терапия – это не набор универсальных советов. Это совместная работа, в которой можно внимательнее увидеть происходящее, разобраться в собственных чувствах и потребностях и постепенно найти подходящий именно вам способ двигаться дальше.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="eyebrow">Как я работаю</span>
+        <h2>Спокойно, бережно и с уважением к вашей истории</h2>
+      </div>
+      <div class="approach-grid">
+        <article class="approach-card"><span>01</span><h3>Без оценок и давления</h3><p>В терапии не нужно показывать себя «правильным». Здесь можно честно говорить о сложных переживаниях без страха осуждения.</p></article>
+        <article class="approach-card"><span>02</span><h3>В контакте с реальной жизнью</h3><p>Мы рассматриваем не только отдельную проблему, но и то, как она проявляется в отношениях, решениях и привычных реакциях.</p></article>
+        <article class="approach-card"><span>03</span><h3>В вашем темпе</h3><p>Я не тороплю и не навязываю готовых решений. Темп и продолжительность терапии определяются вашей ситуацией, состоянием и целями.</p></article>
+        <article class="approach-card"><span>04</span><h3>С профессиональными границами</h3><p>Если вопрос выходит за рамки моей компетенции, я прямо скажу об этом и помогу сориентироваться в выборе профильного специалиста.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section education-section">
+    <div class="container">
+      <div class="section-heading education-heading">
+        <span class="eyebrow">Образование и подготовка</span>
+        <h2>Профильное образование и системное обучение психотерапии</h2>
+      </div>
+      <div class="education-grid">
+        <article class="education-card education-card--primary">
+          <span class="education-card__year">2021</span>
+          <p class="education-card__label">Основное образование</p>
+          <h3>Клиническая психология</h3>
+          <p>Национальный исследовательский Томский государственный университет. Квалификация – клинический психолог. Диплом с отличием.</p>
+        </article>
+        <article class="education-card">
+          <span class="education-card__year">2019–2024</span>
+          <p class="education-card__label">Гештальт-подход</p>
+          <h3>Московский Гештальт Институт</h3>
+          <p>Первая ступень – 180 часов. Программа «Теория и практика гештальт-терапии» – 600 часов.</p>
+        </article>
+        <article class="education-card">
+          <span class="education-card__year">2022–2023</span>
+          <p class="education-card__label">Специализация</p>
+          <h3>Работа с парами и семьями</h3>
+          <p>Программа «Системный подход в гештальт-терапии пар и семей» – 180 часов.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section certificates-section">
+    <div class="container">
+      <div class="section-heading certificates-heading">
+        <div>
+          <span class="eyebrow">Документы</span>
+          <h2>Дипломы и сертификаты</h2>
+        </div>
+        <p>Нажмите на документ, чтобы открыть его во весь экран. В просмотре доступны увеличение, перемещение и переключение между документами.</p>
+      </div>
+
+      <div class="certificate-grid" data-gallery>
+        {certificates.map((certificate, index) => (
+          <button
+            class="certificate-card"
+            type="button"
+            data-certificate-index={index}
+            aria-label={`Открыть: ${certificate.title}`}
+          >
+            <span class="certificate-card__image">
+              <img src={certificate.src} alt="" loading="lazy" />
+              <span class="certificate-card__zoom" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                  <path d="M9 5H5v4M15 5h4v4M9 19H5v-4M15 19h4v-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </span>
+            <span class="certificate-card__body">
+              <span class="certificate-card__group">{certificate.group}</span>
+              <strong>{certificate.title}</strong>
+              <span>{certificate.meta}</span>
+            </span>
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section boundaries-section">
+    <div class="container boundaries-grid">
+      <div>
+        <span class="eyebrow">Профессиональные границы</span>
+        <h2>Когда требуется другой формат помощи</h2>
+      </div>
+      <div class="boundaries-copy">
+        <p>Я работаю со взрослыми клиентами от 18 лет и не заменяю психиатрическую, наркологическую или экстренную медицинскую помощь.</p>
+        <p>При острых психиатрических состояниях, зависимостях без лечения, непосредственной угрозе жизни или безопасности важно обратиться к профильному специалисту или в экстренную службу. При необходимости я помогу сориентироваться, к кому обратиться.</p>
+      </div>
+    </div>
+  </section>
+
+  <ContactCta />
+
+  <dialog class="certificate-viewer" data-viewer aria-label="Просмотр дипломов и сертификатов">
+    <div class="certificate-viewer__topbar">
+      <div>
+        <strong data-viewer-title></strong>
+        <span data-viewer-meta></span>
+      </div>
+
+      <div class="certificate-viewer__actions">
+        <button type="button" data-zoom-out aria-label="Уменьшить">−</button>
+        <button type="button" data-zoom-reset aria-label="Сбросить масштаб">100%</button>
+        <button type="button" data-zoom-in aria-label="Увеличить">+</button>
+        <button type="button" data-viewer-close aria-label="Закрыть просмотр">×</button>
+      </div>
+    </div>
+
+    <button
+      class="certificate-viewer__nav certificate-viewer__nav--prev"
+      type="button"
+      data-viewer-prev
+      aria-label="Предыдущий документ"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M15 18 9 12l6-6" />
+      </svg>
+    </button>
+
+    <div class="certificate-viewer__stage" data-viewer-stage>
+      <img data-viewer-image alt="" draggable="false" />
+    </div>
+
+    <button
+      class="certificate-viewer__nav certificate-viewer__nav--next"
+      type="button"
+      data-viewer-next
+      aria-label="Следующий документ"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="m9 18 6-6-6-6" />
+      </svg>
+    </button>
+
+    <div class="certificate-viewer__counter" data-viewer-counter></div>
+  </dialog>
+</BaseLayout>
+
+<script define:vars={{ certificates }}>
+  const viewer = document.querySelector('[data-viewer]');
+  const stage = viewer?.querySelector('[data-viewer-stage]');
+  const image = viewer?.querySelector('[data-viewer-image]');
+  const title = viewer?.querySelector('[data-viewer-title]');
+  const meta = viewer?.querySelector('[data-viewer-meta]');
+  const counter = viewer?.querySelector('[data-viewer-counter]');
+  const resetButton = viewer?.querySelector('[data-zoom-reset]');
+
+  let currentIndex = 0;
+  let scale = 1;
+  let translateX = 0;
+  let translateY = 0;
+  let dragging = false;
+  let lastX = 0;
+  let lastY = 0;
+
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+  function applyTransform() {
+    if (!image || !resetButton) return;
+    image.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+    resetButton.textContent = `${Math.round(scale * 100)}%`;
+    stage?.classList.toggle('is-zoomed', scale > 1);
+  }
+
+  function resetTransform() {
+    scale = 1;
+    translateX = 0;
+    translateY = 0;
+    applyTransform();
+  }
+
+  function updateViewer(index) {
+    if (!image || !title || !meta || !counter) return;
+    currentIndex = (index + certificates.length) % certificates.length;
+    const certificate = certificates[currentIndex];
+    image.src = certificate.src;
+    image.alt = certificate.title;
+    title.textContent = certificate.title;
+    meta.textContent = certificate.meta;
+    counter.textContent = `${currentIndex + 1} / ${certificates.length}`;
+    resetTransform();
+  }
+
+  function openViewer(index) {
+    if (!viewer) return;
+    updateViewer(index);
+    viewer.showModal();
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeViewer() {
+    if (!viewer) return;
+    viewer.close();
+    document.body.style.overflow = '';
+    resetTransform();
+  }
+
+  document.querySelectorAll('[data-certificate-index]').forEach((button) => {
+    button.addEventListener('click', () => openViewer(Number(button.dataset.certificateIndex)));
+  });
+
+  viewer?.querySelector('[data-viewer-close]')?.addEventListener('click', closeViewer);
+  viewer?.querySelector('[data-viewer-prev]')?.addEventListener('click', () => updateViewer(currentIndex - 1));
+  viewer?.querySelector('[data-viewer-next]')?.addEventListener('click', () => updateViewer(currentIndex + 1));
+  viewer?.querySelector('[data-zoom-in]')?.addEventListener('click', () => {
+    scale = clamp(scale + 0.25, 1, 4);
+    applyTransform();
+  });
+  viewer?.querySelector('[data-zoom-out]')?.addEventListener('click', () => {
+    scale = clamp(scale - 0.25, 1, 4);
+    if (scale === 1) { translateX = 0; translateY = 0; }
+    applyTransform();
+  });
+  resetButton?.addEventListener('click', resetTransform);
+
+  viewer?.addEventListener('click', (event) => {
+    if (event.target === viewer) closeViewer();
+  });
+  viewer?.addEventListener('close', () => {
+    document.body.style.overflow = '';
+  });
+
+  stage?.addEventListener('wheel', (event) => {
+    event.preventDefault();
+    scale = clamp(scale + (event.deltaY < 0 ? 0.2 : -0.2), 1, 4);
+    if (scale === 1) { translateX = 0; translateY = 0; }
+    applyTransform();
+  }, { passive: false });
+
+  stage?.addEventListener('pointerdown', (event) => {
+    if (scale <= 1) return;
+    dragging = true;
+    lastX = event.clientX;
+    lastY = event.clientY;
+    stage.setPointerCapture(event.pointerId);
+  });
+  stage?.addEventListener('pointermove', (event) => {
+    if (!dragging) return;
+    translateX += event.clientX - lastX;
+    translateY += event.clientY - lastY;
+    lastX = event.clientX;
+    lastY = event.clientY;
+    applyTransform();
+  });
+  stage?.addEventListener('pointerup', () => { dragging = false; });
+  stage?.addEventListener('pointercancel', () => { dragging = false; });
+  stage?.addEventListener('dblclick', () => {
+    if (scale === 1) scale = 2;
+    else resetTransform();
+    applyTransform();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (!viewer?.open) return;
+    if (event.key === 'ArrowLeft') updateViewer(currentIndex - 1);
+    if (event.key === 'ArrowRight') updateViewer(currentIndex + 1);
+    if (event.key === 'Escape') closeViewer();
+    if (event.key === '+' || event.key === '=') {
+      scale = clamp(scale + 0.25, 1, 4);
+      applyTransform();
+    }
+    if (event.key === '-') {
+      scale = clamp(scale - 0.25, 1, 4);
+      applyTransform();
+    }
+  });
+</script>
+
+<style>
+  .about-hero { padding-top: clamp(4.5rem, 7vw, 7rem); }
+  .about-hero__grid { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(18rem, .72fr); gap: clamp(3rem, 7vw, 6.5rem); align-items: center; }
+  .about-hero h1 { margin-top: var(--space-4); }
+  .about-hero__lead { max-width: 44rem; margin-top: var(--space-6); color: var(--color-text-secondary); font-size: clamp(1.12rem, 1.5vw, 1.35rem); line-height: 1.6; }
+  .about-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; margin-top: var(--space-10); overflow: hidden; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-border); }
+  .about-stats div { min-height: 8rem; padding: var(--space-6); background: color-mix(in srgb, var(--color-surface) 93%, transparent); }
+  .about-stats strong { display: block; color: var(--color-accent); font-size: clamp(1.7rem, 3vw, 2.4rem); line-height: 1; }
+  .about-stats span { display: block; margin-top: var(--space-3); color: var(--color-text-secondary); font-size: var(--font-size-sm); line-height: 1.45; }
+  .about-portrait { position: relative; overflow: hidden; aspect-ratio: 4 / 5; border-radius: 1.5rem; background: var(--color-surface-muted); box-shadow: var(--shadow-lg); }
+  .about-portrait::after { position: absolute; inset: 0; border: 1px solid rgb(255 255 255 / .55); border-radius: inherit; content: ''; pointer-events: none; }
+  .about-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 36%; }
+
+  .section--warm { background: var(--color-background-warm); }
+  .intro-grid, .boundaries-grid { display: grid; grid-template-columns: minmax(16rem, .7fr) minmax(0, 1fr); gap: clamp(3rem, 8vw, 8rem); align-items: start; }
+  .intro-grid h2, .boundaries-grid h2 { margin-top: var(--space-4); }
+  .intro-copy, .boundaries-copy { padding-top: 1.8rem; }
+  .intro-copy p, .boundaries-copy p { color: var(--color-text-secondary); font-size: clamp(1.05rem, 1.25vw, 1.16rem); line-height: 1.75; }
+  .intro-copy p + p, .boundaries-copy p + p { margin-top: var(--space-6); }
+
+  .section-heading { max-width: 48rem; }
+  .section-heading h2 { margin-top: var(--space-4); }
+  .approach-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); margin-top: var(--space-12); }
+  .approach-card { min-height: 16rem; padding: clamp(1.6rem, 3vw, 2.25rem); border: 1px solid var(--color-border); border-radius: var(--radius-xl); background: var(--color-surface); box-shadow: var(--shadow-sm); }
+  .approach-card > span { color: var(--color-accent); font-size: var(--font-size-xs); font-weight: var(--font-weight-extrabold); letter-spacing: .14em; }
+  .approach-card h3 { margin-top: var(--space-10); }
+  .approach-card p { margin-top: var(--space-4); color: var(--color-text-secondary); }
+
+  .education-section { background: var(--color-surface-muted); }
+  .education-heading { max-width: 52rem; }
+  .education-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-5); margin-top: var(--space-12); }
+  .education-card { position: relative; min-height: 22rem; padding: clamp(1.6rem, 3vw, 2.3rem); overflow: hidden; border: 1px solid var(--color-border); border-radius: var(--radius-xl); background: var(--color-surface); }
+  .education-card--primary { background: var(--color-accent); color: var(--color-text-inverse); }
+  .education-card__year { position: absolute; top: 1.8rem; right: 1.8rem; color: var(--color-text-muted); font-size: var(--font-size-sm); font-weight: var(--font-weight-semibold); }
+  .education-card--primary .education-card__year { color: rgb(255 255 255 / .68); }
+  .education-card__label { color: var(--color-accent); font-size: var(--font-size-xs); font-weight: var(--font-weight-extrabold); letter-spacing: .12em; text-transform: uppercase; }
+  .education-card--primary .education-card__label { color: rgb(255 255 255 / .72); }
+  .education-card h3 { max-width: 18rem; margin-top: 8rem; }
+  .education-card > p:last-child { margin-top: var(--space-4); color: var(--color-text-secondary); }
+  .education-card--primary > p:last-child { color: rgb(255 255 255 / .78); }
+
+  .certificates-heading { display: grid; max-width: none; grid-template-columns: minmax(0, 1fr) minmax(18rem, .58fr); gap: clamp(2rem, 6vw, 5rem); align-items: end; }
+  .certificates-heading p { max-width: 31rem; color: var(--color-text-secondary); line-height: 1.65; }
+  .certificate-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-5); margin-top: var(--space-12); align-items: stretch; }
+  .certificate-card { display: flex; min-width: 0; min-height: 31rem; overflow: hidden; flex-direction: column; border: 1px solid var(--color-border); border-radius: var(--radius-xl); background: var(--color-surface); color: inherit; text-align: left; box-shadow: var(--shadow-sm); cursor: zoom-in; transition: transform var(--duration-normal) var(--easing-standard), box-shadow var(--duration-normal) var(--easing-standard), border-color var(--duration-normal) var(--easing-standard); }
+  .certificate-card__image { position: relative; display: grid; height: 19rem; flex: 0 0 auto; overflow: hidden; place-items: center; background: var(--color-background-warm); border-bottom: 1px solid var(--color-border); }
+  .certificate-card img { display: block; width: 100%; height: 100%; object-fit: contain; padding: 1.1rem; transition: transform var(--duration-normal) var(--easing-standard); }
+  .certificate-card__zoom { position: absolute; top: .9rem; right: .9rem; display: grid; width: 2.5rem; height: 2.5rem; place-items: center; border: 1px solid rgb(255 255 255 / .22); border-radius: 50%; background: rgb(36 39 33 / .88); color: white; box-shadow: 0 4px 14px rgb(18 20 17 / .18); }
+  .certificate-card__body { display: flex; min-height: 12rem; flex: 1; flex-direction: column; padding: 1.4rem 1.45rem 1.55rem; }
+  .certificate-card__group { color: var(--color-accent); font-size: .7rem; font-weight: var(--font-weight-extrabold); letter-spacing: .12em; text-transform: uppercase; }
+  .certificate-card strong { margin-top: .72rem; font-size: 1.05rem; line-height: 1.38; }
+  .certificate-card__body > span:last-child { margin-top: auto; padding-top: 1.25rem; color: var(--color-text-secondary); font-size: var(--font-size-sm); line-height: 1.48; }
+  @media (hover: hover) {
+    .certificate-card:hover { border-color: var(--color-border-strong); box-shadow: var(--shadow-md); transform: translateY(-4px); }
+    .certificate-card:hover img { transform: scale(1.025); }
+    .certificate-card:hover .certificate-card__zoom { background: var(--color-accent); }
+  }
+
+  .boundaries-section { background: var(--color-background-warm); }
+
+  .certificate-viewer { width: 100vw; max-width: none; height: 100dvh; max-height: none; padding: 0; border: 0; background: #151714; color: #fff; }
+  .certificate-viewer::backdrop { background: rgb(12 14 12 / .92); }
+  .certificate-viewer__topbar { position: absolute; top: 0; right: 0; left: 0; z-index: 3; display: flex; min-height: 5.25rem; align-items: center; justify-content: space-between; gap: 1.5rem; padding: .9rem 1.2rem; background: linear-gradient(to bottom, rgb(10 11 10 / .96), rgb(10 11 10 / .72), transparent); }
+  .certificate-viewer__topbar > div:first-child { min-width: 0; }
+  .certificate-viewer__topbar strong, .certificate-viewer__topbar span { display: block; }
+  .certificate-viewer__topbar strong { overflow: hidden; font-size: .95rem; text-overflow: ellipsis; white-space: nowrap; }
+  .certificate-viewer__topbar span { margin-top: .2rem; overflow: hidden; color: rgb(255 255 255 / .64); font-size: .78rem; text-overflow: ellipsis; white-space: nowrap; }
+  .certificate-viewer__actions {
+    display: flex;
+    flex: 0 0 auto;
+    gap: .45rem;
+  }
+
+  .certificate-viewer__actions button {
+    display: grid;
+    min-width: 2.55rem;
+    height: 2.55rem;
+    padding-inline: .7rem;
+    place-items: center;
+    border: 1px solid rgb(255 255 255 / .18);
+    border-radius: 999px;
+    background: rgb(255 255 255 / .1);
+    color: #fff;
+    font-size: 1.15rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .certificate-viewer__actions [data-zoom-reset] {
+    min-width: 4.2rem;
+    font-size: .78rem;
+  }
+
+  .certificate-viewer__stage {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    overflow: hidden;
+    place-items: center;
+    padding: 6rem 5.5rem 4rem;
+    touch-action: none;
+  }
+
+  .certificate-viewer__stage.is-zoomed {
+    cursor: grab;
+  }
+
+  .certificate-viewer__stage.is-zoomed:active {
+    cursor: grabbing;
+  }
+
+  .certificate-viewer__stage img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    user-select: none;
+    transform-origin: center;
+    transition: transform 80ms linear;
+  }
+
+  .certificate-viewer__nav {
+    position: absolute;
+    top: 50%;
+    z-index: 5;
+    display: flex;
+    width: 3.5rem;
+    height: 3.5rem;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(255 255 255 / .18);
+    border-radius: 50%;
+    background: rgb(255 255 255 / .1);
+    color: #fff;
+    line-height: 0;
+    box-shadow: 0 8px 24px rgb(0 0 0 / .22);
+    backdrop-filter: blur(12px);
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition:
+      background var(--duration-normal) var(--easing-standard),
+      border-color var(--duration-normal) var(--easing-standard),
+      transform var(--duration-normal) var(--easing-standard);
+  }
+
+  .certificate-viewer__nav svg {
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    flex: 0 0 auto;
+    pointer-events: none;
+  }
+
+  .certificate-viewer__nav path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .certificate-viewer__nav--prev {
+    left: 1.25rem;
+  }
+
+  .certificate-viewer__nav--next {
+    right: 1.25rem;
+  }
+
+  @media (hover: hover) {
+    .certificate-viewer__nav:hover {
+      border-color: rgb(255 255 255 / .32);
+      background: rgb(255 255 255 / .18);
+      transform: translateY(-50%) scale(1.04);
+    }
+  }
+
+  .certificate-viewer__counter {
+    position: absolute;
+    right: 0;
+    bottom: 1rem;
+    left: 0;
+    z-index: 2;
+    color: rgb(255 255 255 / .68);
+    font-size: .8rem;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  @media (max-width: 60rem) {
+    .about-hero__grid { grid-template-columns: 1fr .75fr; gap: 2.5rem; }
+    .about-stats { grid-template-columns: 1fr; }
+    .about-stats div { min-height: auto; }
+    .education-grid { grid-template-columns: 1fr; }
+    .education-card { min-height: 17rem; }
+    .education-card h3 { margin-top: 5rem; }
+    .certificate-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 46rem) {
+    .about-hero__grid, .intro-grid, .boundaries-grid, .certificates-heading { grid-template-columns: 1fr; }
+    .about-portrait { max-width: 30rem; order: -1; aspect-ratio: 4 / 4.6; }
+    .about-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .about-stats div { padding: 1rem; }
+    .about-stats span { font-size: .72rem; }
+    .intro-copy, .boundaries-copy { padding-top: 0; }
+    .approach-grid { grid-template-columns: 1fr; }
+    .certificates-heading { gap: 1.5rem; }
+    .certificate-grid { grid-template-columns: 1fr; }
+    .certificate-viewer__topbar { align-items: flex-start; flex-direction: column; gap: .65rem; }
+    .certificate-viewer__actions { align-self: flex-end; }
+    .certificate-viewer__stage { padding: 8rem 1rem 3rem; }
+    .certificate-viewer__nav {
+      top: auto;
+      bottom: .8rem;
+      width: 2.8rem;
+      height: 2.8rem;
+      transform: none;
+    }
+
+    .certificate-viewer__nav:hover {
+      transform: none;
+    }
+    .certificate-viewer__nav--prev { left: 1rem; }
+    .certificate-viewer__nav--next { right: 1rem; }
+  }
+  @media (max-width: 34rem) {
+    .about-stats { grid-template-columns: 1fr; }
+    .about-stats div { display: grid; grid-template-columns: 5rem 1fr; align-items: center; gap: .6rem; }
+    .about-stats span { margin-top: 0; font-size: .8rem; }
+    .certificate-card__image { height: 16rem; }
+    .certificate-viewer__topbar > div:first-child { display: none; }
+    .certificate-viewer__actions { width: 100%; justify-content: flex-end; }
+    .certificate-viewer__stage { padding-top: 4.5rem; }
+  }
+</style>

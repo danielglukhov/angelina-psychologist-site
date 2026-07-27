@@ -1,0 +1,205 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../../components/ui/Button.astro';
+import Container from '../../components/ui/Container.astro';
+import Section from '../../components/ui/Section.astro';
+import ContactCTA from '../../components/blocks/ContactCTA/ContactCTA.astro';
+import LocationMap from '../../components/blocks/LocationMap.astro';
+
+const requests = [
+  'Тревога, постоянное напряжение и навязчивые мысли',
+  'Эмоциональное выгорание и ощущение потери сил',
+  'Жизненные кризисы, перемены и потеря привычных опор',
+  'Трудности в отношениях и повторяющиеся конфликты',
+  'Самокритика, вина и сложности с собственными границами',
+  'Одиночество, внутренние конфликты и потребность лучше понять себя',
+];
+---
+
+<BaseLayout
+  title="Психолог в Батуми – очные консультации"
+  description="Очные консультации клинического психолога Ангелины Глуховой в психологическом центре Unbox в Батуми. 50 минут, стоимость $67."
+>
+  <Section class="service-hero">
+    <Container>
+      <div class="service-hero__grid">
+        <div>
+          <span class="eyebrow">Очно в Батуми</span>
+          <h1>Очные консультации в спокойном и безопасном пространстве</h1>
+          <p class="lead">
+            Личная встреча помогает выделить время только для себя, не отвлекаться
+            на внешние дела и спокойно говорить о том, что сейчас действительно важно.
+          </p>
+
+          <div class="actions">
+            <Button href="/start">
+              Записаться
+            </Button>
+            <Button href="#location" variant="ghost">Посмотреть место</Button>
+          </div>
+        </div>
+
+        <aside class="service-facts" aria-label="Условия очной консультации">
+          <div><span>Место</span><strong>Психологический центр Unbox</strong></div>
+          <div><span>Формат</span><strong>Отдельный кабинет</strong></div>
+          <div><span>Длительность</span><strong>50 минут</strong></div>
+          <div><span>Стоимость</span><strong>$67</strong></div>
+        </aside>
+      </div>
+    </Container>
+  </Section>
+
+  <Section class="service-content">
+    <Container>
+      <div class="content-grid">
+        <div>
+          <span class="eyebrow">С чем можно обратиться</span>
+          <h2>Необязательно ждать, пока станет совсем тяжело</h2>
+          <p class="lead">
+            Обратиться за поддержкой можно уже тогда, когда привычные способы
+            справляться перестают помогать или вы хотите лучше понять себя.
+          </p>
+        </div>
+
+        <ul class="request-list">
+          {requests.map((request) => <li>{request}</li>)}
+        </ul>
+      </div>
+    </Container>
+  </Section>
+
+  <Section>
+    <Container>
+      <div class="process-grid">
+        <div>
+          <span class="eyebrow">Первая встреча</span>
+          <h2>Как проходит консультация</h2>
+        </div>
+
+        <div class="process-copy">
+          <p class="lead">
+            Первая встреча – это знакомство и возможность понять, насколько вам
+            подходит мой стиль работы.
+          </p>
+          <p>
+            Мы обсудим вашу ситуацию, то, что беспокоит сейчас, и определим,
+            какие задачи можно поставить перед терапией. Не нужно заранее
+            формулировать идеальный запрос – достаточно прийти с тем, что есть.
+          </p>
+          <p>
+            Все, что обсуждается на консультации, остается конфиденциальным.
+            Встреча проходит без оценок, давления и требований двигаться быстрее,
+            чем вам комфортно.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <Section id="location" class="location-section">
+    <Container>
+      <LocationMap />
+    </Container>
+  </Section>
+
+  <ContactCTA />
+</BaseLayout>
+
+<style>
+  :global(.service-hero) {
+    padding-top: clamp(3rem, 6vw, 5.5rem);
+    background: linear-gradient(180deg, var(--color-background), color-mix(in srgb, var(--color-accent-soft) 24%, var(--color-background)));
+  }
+
+  .service-hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(20rem, 0.65fr);
+    gap: clamp(3rem, 7vw, 6rem);
+    align-items: center;
+  }
+
+  .service-facts {
+    display: grid;
+    gap: var(--space-3);
+    padding: var(--space-6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-md);
+  }
+
+  .service-facts div {
+    display: grid;
+    gap: var(--space-1);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .service-facts div:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .service-facts span {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .service-facts strong {
+    font-size: var(--font-size-lg);
+  }
+
+  :global(.service-content),
+  :global(.location-section) {
+    background: var(--color-background-warm);
+  }
+
+  .content-grid,
+  .process-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(3rem, 7vw, 6rem);
+    align-items: start;
+  }
+
+  .request-list {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--color-border-strong);
+  }
+
+  .request-list li {
+    position: relative;
+    padding: var(--space-5) var(--space-4) var(--space-5) 2.25rem;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .request-list li::before {
+    position: absolute;
+    top: 1.85rem;
+    left: 0;
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    background: var(--color-accent);
+    content: '';
+  }
+
+  .process-copy > p:not(.lead) {
+    margin-top: var(--space-5);
+    color: var(--color-text-secondary);
+  }
+
+  @media (max-width: 52rem) {
+    .service-hero__grid,
+    .content-grid,
+    .process-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

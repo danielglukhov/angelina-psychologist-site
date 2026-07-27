@@ -1,0 +1,89 @@
+---
+import { SITE } from '../config/site';
+
+const currentPath = Astro.url.pathname;
+
+const navItems = [
+  { href: '/services/online', label: 'Онлайн' },
+  { href: '/services/batumi', label: 'Очно в Батуми' },
+  { href: '/services/couples', label: 'Для пар' },
+  { href: '/about', label: 'Об Ангелине' },
+  { href: '/blog', label: 'Публикации' },
+  { href: '/contacts', label: 'Контакты' },
+];
+
+const isCurrentPage = (href: string) =>
+  href === '/' ? currentPath === '/' : currentPath === href || currentPath.startsWith(`${href}/`);
+---
+
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="/" aria-label={`${SITE.name} – на главную`}>
+      <img class="brand-mark" src={SITE.mark} alt="" width="64" height="64" aria-hidden="true" />
+      <span class="brand-copy">
+        <span class="brand-name">Ангелина Глухова</span>
+        <span class="brand-role">Психолог · гештальт-терапевт</span>
+      </span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Основная навигация">
+      {navItems.map((item) => (
+        <a class="nav-link" href={item.href} aria-current={isCurrentPage(item.href) ? 'page' : undefined}>
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <a class="header-cta" href={SITE.bookingPath} aria-current={isCurrentPage(SITE.bookingPath) ? 'page' : undefined}>
+      Записаться
+    </a>
+
+    <details class="mobile-menu">
+      <summary aria-label="Открыть меню">
+        <span></span><span></span><span></span>
+      </summary>
+      <nav aria-label="Мобильная навигация">
+        {navItems.map((item) => (
+          <a class="nav-link" href={item.href} aria-current={isCurrentPage(item.href) ? 'page' : undefined}>
+            {item.label}
+          </a>
+        ))}
+        <a class="mobile-cta" href={SITE.bookingPath} aria-current={isCurrentPage(SITE.bookingPath) ? 'page' : undefined}>
+          Записаться
+        </a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<style>
+  .site-header { position: sticky; top: 0; z-index: var(--z-header); border-bottom: 1px solid color-mix(in srgb, var(--color-border) 78%, transparent); background: color-mix(in srgb, var(--color-background) 88%, transparent); backdrop-filter: blur(18px); }
+  .header-row { display: flex; min-height: var(--header-height); align-items: center; gap: var(--space-5); }
+  .brand { display: inline-flex; flex: 0 0 auto; align-items: center; gap: .48rem; margin-right: auto; color: var(--color-text-primary); text-decoration: none; }
+  .brand-mark { display: block; width: 3.05rem; height: 3.05rem; flex: 0 0 auto; object-fit: contain; }
+  .brand-copy { display: grid; gap: .14rem; line-height: 1; }
+  .brand-name { font-family: Georgia, 'Times New Roman', serif; font-size: 1.14rem; font-weight: 500; letter-spacing: .01em; white-space: nowrap; }
+  .brand-role { color: var(--color-text-muted); font-size: .68rem; letter-spacing: .035em; white-space: nowrap; }
+  .desktop-nav { display: flex; align-items: center; gap: clamp(.85rem, 1.4vw, 1.3rem); font-size: .88rem; }
+  .desktop-nav a { position: relative; color: var(--color-text-secondary); text-decoration: none; white-space: nowrap; transition: color var(--duration-fast); }
+  .desktop-nav a:hover, .desktop-nav a[aria-current='page'] { color: var(--color-text-primary); }
+  .desktop-nav a[aria-current='page']::after { position: absolute; right: 0; bottom: -.45rem; left: 0; height: 2px; border-radius: 2px; background: var(--color-accent); content: ''; }
+  .header-cta, .mobile-cta { display: inline-flex; min-height: 2.65rem; flex-shrink: 0; align-items: center; justify-content: center; padding-inline: 1.15rem; border-radius: var(--radius-pill); background: var(--color-accent); color: var(--color-accent-contrast); font-size: .9rem; font-weight: var(--font-weight-bold); text-decoration: none; }
+  .mobile-menu { position: relative; display: none; }
+  .mobile-menu summary { display: grid; width: 2.75rem; height: 2.75rem; place-content: center; gap: .28rem; border: 1px solid var(--color-border); border-radius: 50%; background: var(--color-surface); cursor: pointer; list-style: none; }
+  .mobile-menu summary::-webkit-details-marker { display: none; }
+  .mobile-menu summary span { width: 1rem; height: 1.5px; background: var(--color-text-primary); }
+  .mobile-menu nav { position: absolute; top: calc(100% + var(--space-3)); right: 0; display: grid; width: min(19rem, calc(100vw - 2rem)); gap: var(--space-1); padding: var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); box-shadow: var(--shadow-md); }
+  .mobile-menu nav > a { padding: .75rem .85rem; border-radius: var(--radius-sm); text-decoration: none; }
+  .mobile-menu nav > a:hover, .mobile-menu nav > a[aria-current='page'] { background: var(--color-surface-muted); }
+  .mobile-menu .mobile-cta { margin-top: var(--space-2); color: var(--color-accent-contrast); }
+  @media (max-width: 72rem) { .desktop-nav { display: none; } .mobile-menu { display: block; } }
+  @media (max-width: 38rem) {
+    .header-cta { display: none; }
+    .brand { gap: .46rem; }
+    .brand-mark { width: 2.65rem; height: 2.65rem; }
+    .brand-name { font-size: 1rem; }
+    .brand-role { font-size: .61rem; }
+  }
+  @media (max-width: 24rem) { .brand-role { display: none; } }
+</style>

@@ -1,0 +1,14 @@
+{
+  "name": "Ангелина Глухова – психолог",
+  "short_name": "Ангелина Глухова",
+  "description": "Клинический психолог и гештальт-терапевт. Онлайн и очно в Батуми.",
+  "lang": "ru",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#F4F1EA",
+  "theme_color": "#F4F1EA",
+  "icons": [
+    { "src": "/brand/logo-square-dark-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/brand/logo-square-light-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -1,0 +1,43 @@
+---
+interface Props {
+  author?: string;
+  role?: string;
+  class?: string;
+}
+
+const { author, role, class: className = '' } = Astro.props;
+---
+
+<figure class:list={['quote', className]}>
+  <blockquote><slot /></blockquote>
+  {(author || role) && (
+    <figcaption>
+      {author && <strong>{author}</strong>}
+      {role && <span>{role}</span>}
+    </figcaption>
+  )}
+</figure>
+
+<style>
+  .quote {
+    margin: 0;
+    padding: var(--space-8);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    background: var(--color-surface-muted);
+  }
+
+  blockquote {
+    color: var(--color-text-primary);
+    font-size: var(--font-size-lg);
+    line-height: 1.65;
+  }
+
+  figcaption {
+    display: grid;
+    gap: var(--space-1);
+    margin-top: var(--space-5);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+  }
+</style>

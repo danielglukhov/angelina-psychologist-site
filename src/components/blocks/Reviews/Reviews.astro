@@ -1,0 +1,60 @@
+---
+import Container from '../../ui/Container.astro';
+import Quote from '../../ui/Quote.astro';
+import Section from '../../ui/Section.astro';
+import SectionHeader from '../../ui/SectionHeader.astro';
+
+interface ReviewItem {
+  text: string;
+  author?: string;
+  role?: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  items?: ReviewItem[];
+}
+
+const {
+  eyebrow = 'Отзывы',
+  title = 'Опыт клиентов',
+  description = 'Раздел подготовлен для публикации отзывов с согласия клиентов и без раскрытия личной информации.',
+  items = [],
+} = Astro.props;
+---
+
+<Section>
+  <Container>
+    <SectionHeader eyebrow={eyebrow} title={title} description={description} />
+
+    {items.length > 0 ? (
+      <div class="reviews-grid">
+        {items.map((item) => (
+          <Quote author={item.author} role={item.role}>{item.text}</Quote>
+        ))}
+      </div>
+    ) : (
+      <p class="reviews-empty">Отзывы будут добавлены после получения разрешения на публикацию.</p>
+    )}
+  </Container>
+</Section>
+
+<style>
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5);
+    margin-top: var(--space-10);
+  }
+
+  .reviews-empty {
+    margin-top: var(--space-8);
+    color: var(--color-text-secondary);
+  }
+
+  @media (max-width: 50rem) {
+    .reviews-grid { grid-template-columns: 1fr; }
+  }
+</style>

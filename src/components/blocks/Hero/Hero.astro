@@ -1,0 +1,178 @@
+---
+import Button from '../../ui/Button.astro';
+import Container from '../../ui/Container.astro';
+import Section from '../../ui/Section.astro';
+
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  primaryHref?: string;
+  primaryLabel?: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+  imageSrc?: string;
+  imageAlt?: string;
+}
+
+const {
+  eyebrow = 'Батуми · Онлайн по всему миру',
+  title = 'Психологическая помощь взрослым и парам',
+  description = 'Помогаю справляться с тревогой, выгоранием, жизненными кризисами и сложностями в отношениях.',
+  primaryHref = '/start',
+  primaryLabel = 'Записаться',
+  secondaryHref = '#requests',
+  secondaryLabel = 'С чем я работаю',
+  imageSrc = '/images/hero.png',
+  imageAlt = 'Ангелина Глухова, клинический психолог и гештальт-терапевт',
+} = Astro.props;
+---
+
+<Section class="hero-block">
+  <Container>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">{eyebrow}</span>
+
+        <h1>{title}</h1>
+
+        <p class="lead">{description}</p>
+
+        <div class="actions">
+          <Button href={primaryHref}>
+            {primaryLabel}
+          </Button>
+
+          <Button href={secondaryHref} variant="ghost">
+            {secondaryLabel}
+          </Button>
+        </div>
+
+        <p class="hero-note">
+          Конфиденциально · Без оценки · В вашем темпе
+        </p>
+      </div>
+
+      <figure class="portrait">
+        <img
+          src={imageSrc}
+          alt={imageAlt}
+          width="900"
+          height="1125"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </figure>
+    </div>
+  </Container>
+</Section>
+
+<style>
+  :global(.hero-block) {
+    position: relative;
+    overflow: hidden;
+    padding-top: clamp(3rem, 5vw, 4.5rem);
+    padding-bottom: clamp(4rem, 6vw, 5.75rem);
+  }
+
+  :global(.hero-block)::before {
+    position: absolute;
+    top: -15rem;
+    right: -11rem;
+    width: 32rem;
+    height: 32rem;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      var(--color-accent-soft),
+      transparent 68%
+    );
+    content: '';
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  .hero-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(22rem, 28rem);
+    gap: clamp(3rem, 7vw, 6rem);
+    align-items: center;
+  }
+
+  .hero-copy {
+    min-width: 0;
+  }
+
+  h1 {
+    max-width: 43rem;
+    margin-top: var(--space-5);
+  }
+
+  .hero-copy .lead {
+    max-width: 36rem;
+  }
+
+  .hero-note {
+    margin-top: var(--space-6);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+  }
+
+  .portrait {
+    position: relative;
+    width: min(100%, 28rem);
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    margin: 0;
+    justify-self: end;
+    border-radius: var(--radius-xl);
+    background: var(--color-surface-muted);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .portrait::after {
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgb(255 255 255 / 0.35);
+    border-radius: inherit;
+    content: '';
+    pointer-events: none;
+  }
+
+  .portrait img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 58% center;
+  }
+
+  @media (max-width: 56rem) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-10);
+    }
+
+    .hero-copy {
+      max-width: 44rem;
+    }
+
+    .portrait {
+      width: min(100%, 28rem);
+      justify-self: center;
+    }
+  }
+
+  @media (max-width: 35rem) {
+    :global(.hero-block) {
+      padding-top: var(--space-10);
+    }
+
+    .portrait {
+      width: 100%;
+      border-radius: var(--radius-lg);
+    }
+  }
+</style>

@@ -1,0 +1,62 @@
+---
+import Container from '../../ui/Container.astro';
+import Section from '../../ui/Section.astro';
+import SectionHeader from '../../ui/SectionHeader.astro';
+
+interface ServiceItem { title: string; text: string; href: string; meta?: string; }
+interface Props { eyebrow?: string; title?: string; description?: string; items?: ServiceItem[]; }
+
+const defaultItems: ServiceItem[] = [
+  { title: 'Онлайн', text: 'Индивидуальные консультации из любой страны в привычном и безопасном пространстве.', href: '/services/online', meta: 'Индивидуально' },
+  { title: 'Очно в Батуми', text: 'Личные встречи в спокойном кабинете для тех, кому важен живой контакт.', href: '/services/batumi', meta: 'Индивидуально' },
+  { title: 'Для пар', text: 'Работа с повторяющимися конфликтами, близостью, доверием и умением слышать друг друга.', href: '/services/couples', meta: 'Совместно' },
+];
+
+const {
+  eyebrow = 'Форматы работы',
+  title = 'Выберите подходящий способ встречи',
+  description = 'Формат можно обсудить до первой консультации. Главное – чтобы вам было достаточно спокойно и удобно начать.',
+  items = defaultItems,
+} = Astro.props;
+---
+
+<Section class="services-block">
+  <Container>
+    <SectionHeader eyebrow={eyebrow} title={title} description={description} />
+
+    <div class="services-grid">
+      {items.map((item, index) => (
+        <a class="service-card" href={item.href}>
+          <div class="service-topline">
+            <span>{item.meta}</span>
+            <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+          </div>
+          <h3>{item.title}</h3>
+          <p>{item.text}</p>
+          <span class="service-link">Подробнее <span aria-hidden="true">↗</span></span>
+        </a>
+      ))}
+    </div>
+  </Container>
+</Section>
+
+<style>
+  .services-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-5); margin-top: var(--space-12); }
+  .service-card {
+    display: flex;
+    min-height: 18rem;
+    flex-direction: column;
+    padding: var(--space-6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--duration-normal), border-color var(--duration-normal), box-shadow var(--duration-normal);
+  }
+  .service-topline { display: flex; justify-content: space-between; gap: var(--space-4); color: var(--color-text-muted); font-size: var(--font-size-xs); font-weight: var(--font-weight-bold); letter-spacing: .08em; text-transform: uppercase; }
+  .service-card h3 { margin-top: var(--space-8); }
+  .service-card p { margin-top: var(--space-4); color: var(--color-text-secondary); }
+  .service-link { display: inline-flex; align-items: center; gap: var(--space-2); margin-top: auto; padding-top: var(--space-8); color: var(--color-accent); font-weight: var(--font-weight-bold); }
+  @media (hover: hover) { .service-card:hover { border-color: var(--color-border-strong); box-shadow: var(--shadow-md); transform: translateY(-4px); } }
+  @media (max-width: 50rem) { .services-grid { grid-template-columns: 1fr; } .service-card { min-height: 17rem; } }
+</style>

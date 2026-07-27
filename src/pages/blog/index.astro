@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogCard from '../../components/blog/BlogCard.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+---
+<BaseLayout
+  title="Статьи психолога Ангелины Глуховой"
+  description="Материалы о тревоге, выгорании, отношениях, переезде и психотерапии – спокойно, бережно и без универсальных рецептов."
+>
+  <section class="blog-hero section">
+    <div class="container blog-hero__grid">
+      <div>
+        <span class="eyebrow">Полезные материалы</span>
+        <h1>Статьи о психологическом здоровье и отношениях</h1>
+      </div>
+      <p>Здесь я разбираю темы, с которыми люди часто приходят в терапию: тревогу, выгорание, жизненные кризисы, переезд и сложности в паре.</p>
+    </div>
+  </section>
+
+  <section class="blog-list section">
+    <div class="container">
+      <div class="blog-grid">
+        {posts.map((post, index) => (
+          <BlogCard
+            href={`/blog/${post.id}/`}
+            title={post.data.title}
+            description={post.data.description}
+            category={post.data.category}
+            readingTime={post.data.readingTime}
+            publishedAt={post.data.publishedAt}
+            featured={post.data.featured || index === 0}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .blog-hero { padding-top: clamp(4.5rem, 7vw, 7rem); }
+  .blog-hero__grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(19rem, .55fr); gap: clamp(3rem, 8vw, 8rem); align-items: end; }
+  .blog-hero h1 { margin-top: var(--space-4); }
+  .blog-hero p { max-width: 33rem; padding-bottom: .45rem; color: var(--color-text-secondary); font-size: clamp(1.05rem, 1.25vw, 1.18rem); line-height: 1.7; }
+  .blog-list { padding-top: 0; }
+  .blog-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); }
+  @media (max-width: 50rem) {
+    .blog-hero__grid, .blog-grid { grid-template-columns: 1fr; }
+    .blog-hero__grid { gap: 1.5rem; }
+  }
+</style>

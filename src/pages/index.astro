@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import About from '../components/blocks/About/About.astro';
+import ContactCTA from '../components/blocks/ContactCTA/ContactCTA.astro';
+import FAQ from '../components/blocks/FAQ/FAQ.astro';
+import Hero from '../components/blocks/Hero/Hero.astro';
+import Requests from '../components/blocks/Requests/Requests.astro';
+import Services from '../components/blocks/Services/Services.astro';
+import Video from '../components/blocks/Video/Video.astro';
+---
+
+<BaseLayout
+  title="Психолог в Батуми и онлайн"
+  description="Индивидуальные консультации и работа с парами. Помощь при тревоге, выгорании, кризисах и трудностях в отношениях."
+>
+  <Hero />
+  <Requests />
+  <About />
+  <Video
+    videoSrc="/videos/video.mp4"
+  />
+  <Services />
+  <FAQ />
+  <ContactCTA />
+</BaseLayout>

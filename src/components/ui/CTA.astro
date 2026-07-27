@@ -1,0 +1,36 @@
+---
+interface Props { eyebrow?: string; title: string; description?: string; class?: string; }
+const { eyebrow, title, description, class: className = '' } = Astro.props;
+---
+
+<div class:list={['cta-box', className]}>
+  <div class="cta-box__content">
+    {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+    <h2>{title}</h2>
+    {description && <p>{description}</p>}
+  </div>
+  <div class="cta-box__actions"><slot /></div>
+</div>
+
+<style>
+  .cta-box {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    align-items: end;
+    justify-content: space-between;
+    gap: var(--space-10);
+    padding: clamp(2.25rem, 6vw, 4.75rem);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 18%, transparent);
+    border-radius: var(--radius-xl);
+    background: var(--color-accent-soft);
+  }
+  .cta-box::after { position: absolute; right: -8rem; bottom: -12rem; width: 28rem; height: 28rem; border-radius: 50%; background: color-mix(in srgb, var(--color-surface) 60%, transparent); content: ''; pointer-events: none; }
+  .cta-box__content, .cta-box__actions { position: relative; z-index: 1; }
+  .cta-box__content { max-width: 44rem; }
+  h2 { margin-top: var(--space-4); }
+  p { margin-top: var(--space-5); color: var(--color-text-secondary); font-size: var(--font-size-lg); }
+  .cta-box__actions { display: flex; flex-wrap: wrap; flex: 0 0 auto; gap: var(--space-3); }
+  @media (max-width: 50rem) { .cta-box { align-items: start; flex-direction: column; } }
+  @media (max-width: 35rem) { .cta-box__actions { width: 100%; flex-direction: column; } .cta-box__actions :global(.button) { width: 100%; } }
+</style>

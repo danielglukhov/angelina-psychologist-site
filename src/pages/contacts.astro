@@ -1,0 +1,149 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import Container from '../components/ui/Container.astro';
+import Section from '../components/ui/Section.astro';
+import LocationMap from '../components/blocks/LocationMap.astro';
+import { SITE } from '../config/site';
+---
+
+<BaseLayout
+  title="Контакты и запись на консультацию"
+  description="Запись на онлайн- или очную консультацию психолога Ангелины Глуховой. Telegram, WhatsApp, email и адрес кабинета в Батуми."
+>
+  <Section class="contacts-hero">
+    <Container>
+      <div class="contacts-grid">
+        <div class="contacts-copy">
+          <span class="eyebrow">Контакты</span>
+          <h1>Записаться на консультацию</h1>
+          <p class="lead">
+            Напишите удобным способом. Необязательно подробно описывать ситуацию –
+            достаточно нескольких слов о том, что сейчас происходит.
+          </p>
+
+          <div class="contact-buttons">
+            <Button href={SITE.telegram} target="_blank" rel="noopener noreferrer">
+              Написать в Telegram
+            </Button>
+            <Button href={SITE.whatsapp} target="_blank" rel="noopener noreferrer" variant="ghost">
+              Написать в WhatsApp
+            </Button>
+          </div>
+        </div>
+
+        <aside class="contact-card">
+          <div>
+            <span>Email</span>
+            <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+          </div>
+          <div>
+            <span>Очно</span>
+            <p>Психологический центр Unbox, Батуми</p>
+          </div>
+          <div>
+            <span>Онлайн</span>
+            <p>По всему миру</p>
+          </div>
+          <div>
+            <span>Ответ</span>
+            <p>Обычно в течение дня</p>
+          </div>
+        </aside>
+      </div>
+    </Container>
+  </Section>
+
+  <Section class="contacts-location">
+    <Container>
+      <LocationMap />
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  :global(.contacts-hero) {
+    padding-top: clamp(3rem, 6vw, 5rem);
+  }
+
+  .contacts-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(20rem, 0.8fr);
+    gap: clamp(3rem, 7vw, 6rem);
+    align-items: center;
+  }
+
+  .contacts-copy {
+    min-width: 0;
+  }
+
+  .contact-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+  }
+
+  .contact-card {
+    display: grid;
+    gap: var(--space-5);
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-md);
+  }
+
+  .contact-card div {
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .contact-card div:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .contact-card span {
+    display: block;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .contact-card a,
+  .contact-card p {
+    margin-top: var(--space-2);
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-semibold);
+    overflow-wrap: anywhere;
+  }
+
+  .contact-card a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  :global(.contacts-location) {
+    background: var(--color-background-warm);
+  }
+
+  @media (max-width: 52rem) {
+    .contacts-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 35rem) {
+    .contact-buttons {
+      display: grid;
+    }
+
+    .contact-buttons :global(.button) {
+      width: 100%;
+    }
+  }
+</style>

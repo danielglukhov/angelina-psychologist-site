@@ -1,0 +1,16 @@
+{
+  "routes": [
+    "/",
+    "/404",
+    "/about",
+    "/blog",
+    "/contacts",
+    "/privacy",
+    "/robots.txt",
+    "/services/batumi",
+    "/services/couples",
+    "/services/online",
+    "/start"
+  ],
+  "missing_internal_links": []
+}

@@ -1,0 +1,186 @@
+---
+import Button from '../ui/Button.astro';
+
+interface Props {
+  title?: string;
+  address?: string;
+  note?: string;
+  mapsHref?: string;
+  email?: string;
+}
+
+const {
+  title = 'Психологический центр Unbox',
+  address = '38 Tbel-Abuseridze St, Батуми, Грузия',
+  note = 'Консультации проходят в отдельном кабинете. Подробности о входе и кабинете я отправлю после подтверждения записи.',
+  mapsHref = 'https://maps.app.goo.gl/5KCU4vhxsfasLnJr8',
+  email = 'angelina.glukhova.97@gmail.com',
+} = Astro.props;
+---
+
+<div class="location-card">
+  <div class="location-copy">
+    <span class="eyebrow">Место встречи</span>
+    <h2>{title}</h2>
+    <p class="location-address">{address}</p>
+    <p>{note}</p>
+
+    <dl class="location-meta">
+      <div>
+        <dt>Формат</dt>
+        <dd>Отдельный кабинет</dd>
+      </div>
+      <div>
+        <dt>Длительность</dt>
+        <dd>50 минут</dd>
+      </div>
+      <div>
+        <dt>Стоимость</dt>
+        <dd>$67</dd>
+      </div>
+    </dl>
+
+    <div class="location-actions">
+      <Button href={mapsHref} target="_blank" rel="noopener noreferrer">
+        Открыть маршрут
+      </Button>
+      <a class="email-link" href={`mailto:${email}`}>{email}</a>
+    </div>
+  </div>
+
+  <div class="map-frame">
+    <iframe
+      title="Психологический центр Unbox на карте Батуми"
+      src="https://www.google.com/maps?q=41.6330853,41.6132516&z=17&output=embed"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      allowfullscreen
+    ></iframe>
+  </div>
+</div>
+
+<style>
+  .location-card {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(24rem, 1.1fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: stretch;
+    padding: clamp(1.5rem, 4vw, 3rem);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-md);
+  }
+
+  .location-copy {
+    align-self: center;
+    min-width: 0;
+  }
+
+  .location-copy h2 {
+    margin-top: var(--space-4);
+    font-size: clamp(1.9rem, 3vw, 2.75rem);
+  }
+
+  .location-address {
+    margin-top: var(--space-5);
+    color: var(--color-text-primary);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .location-copy > p:not(.location-address) {
+    margin-top: var(--space-3);
+    color: var(--color-text-secondary);
+  }
+
+  .location-meta {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-3);
+    margin-top: var(--space-8);
+  }
+
+  .location-meta div {
+    padding: var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-background);
+  }
+
+  .location-meta dt {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .location-meta dd {
+    margin-top: var(--space-2);
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .location-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-5);
+    margin-top: var(--space-8);
+  }
+
+  .email-link {
+    color: var(--color-accent);
+    font-size: var(--font-size-sm);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .map-frame {
+    min-height: 28rem;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-muted);
+  }
+
+  .map-frame iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 28rem;
+    border: 0;
+  }
+
+  @media (max-width: 58rem) {
+    .location-card {
+      grid-template-columns: 1fr;
+    }
+
+    .map-frame,
+    .map-frame iframe {
+      min-height: 24rem;
+    }
+  }
+
+  @media (max-width: 35rem) {
+    .location-meta {
+      grid-template-columns: 1fr;
+    }
+
+    .location-actions {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .location-actions :global(.button) {
+      width: 100%;
+    }
+
+    .map-frame,
+    .map-frame iframe {
+      min-height: 20rem;
+    }
+  }
+</style>

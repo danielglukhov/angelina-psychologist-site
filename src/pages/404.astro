@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import Container from '../components/ui/Container.astro';
+---
+
+<BaseLayout
+  title="Страница не найдена"
+  description="Запрошенная страница не найдена."
+  noindex={true}
+>
+  <section class="not-found">
+    <Container>
+      <div class="not-found__content">
+        <span class="not-found__code" aria-hidden="true">404</span>
+        <span class="eyebrow">Такой страницы нет</span>
+        <h1>Похоже, ссылка устарела или в адресе есть ошибка</h1>
+        <p class="lead">
+          Вернитесь на главную страницу или перейдите к записи на консультацию.
+        </p>
+        <div class="actions">
+          <Button href="/">Вернуться на главную</Button>
+          <Button href="/start" variant="ghost">Как записаться</Button>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    display: grid;
+    min-height: min(44rem, calc(100vh - var(--header-height)));
+    place-items: center;
+    padding-block: clamp(4rem, 10vw, 8rem);
+    background:
+      radial-gradient(circle at 75% 20%, var(--color-accent-soft), transparent 25rem),
+      var(--color-background);
+  }
+
+  .not-found__content {
+    max-width: 48rem;
+  }
+
+  .not-found__code {
+    display: block;
+    margin-bottom: var(--space-5);
+    color: color-mix(in srgb, var(--color-accent) 24%, transparent);
+    font-size: clamp(6rem, 18vw, 12rem);
+    font-weight: var(--font-weight-extrabold);
+    line-height: .75;
+    letter-spacing: -.08em;
+  }
+
+  .not-found h1 { margin-top: var(--space-5); }
+</style>
