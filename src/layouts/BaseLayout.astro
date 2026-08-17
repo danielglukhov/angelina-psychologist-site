@@ -47,10 +47,6 @@ const personSchema = {
     addressLocality: SITE.location.city,
     addressCountry: SITE.location.countryCode,
   },
-  areaServed: [
-    { '@type': 'City', name: SITE.location.city },
-    { '@type': 'AdministrativeArea', name: 'Онлайн по всему миру' },
-  ],
   sameAs: [SITE.telegram, SITE.b17],
 };
 
