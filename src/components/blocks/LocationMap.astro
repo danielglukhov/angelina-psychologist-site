@@ -7,6 +7,9 @@ interface Props {
   note?: string;
   mapsHref?: string;
   email?: string;
+  format?: string;
+  duration?: string;
+  price?: string;
 }
 
 const {
@@ -15,6 +18,9 @@ const {
   note = 'Консультации проходят в отдельном кабинете. Подробности о входе и кабинете я отправлю после подтверждения записи.',
   mapsHref = 'https://maps.app.goo.gl/5KCU4vhxsfasLnJr8',
   email = 'angelina.glukhova.97@gmail.com',
+  format = 'Отдельный кабинет',
+  duration = '50 минут',
+  price = '$67',
 } = Astro.props;
 ---
 
@@ -28,15 +34,15 @@ const {
     <dl class="location-meta">
       <div>
         <dt>Формат</dt>
-        <dd>Отдельный кабинет</dd>
+        <dd>{format}</dd>
       </div>
       <div>
         <dt>Длительность</dt>
-        <dd>50 минут</dd>
+        <dd>{duration}</dd>
       </div>
       <div>
         <dt>Стоимость</dt>
-        <dd>$67</dd>
+        <dd>{price}</dd>
       </div>
     </dl>
 

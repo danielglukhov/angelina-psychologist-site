@@ -1,0 +1,36 @@
+---
+import Container from '../ui/Container.astro';
+import Section from '../ui/Section.astro';
+---
+
+<Section class="practice-boundaries">
+  <Container>
+    <div class="practice-boundaries__layout">
+      <div>
+        <span class="eyebrow">Границы практики</span>
+        <h2>С чем я не работаю</h2>
+        <p class="lead">Честно обозначить границы компетенций – часть безопасной и профессиональной работы.</p>
+      </div>
+      <div class="practice-boundaries__card">
+        <p>Я не работаю:</p>
+        <ul>
+          <li>с людьми, которым ещё нет 18 лет;</li>
+          <li>со сложными клиническими запросами: БАР, ОКР, ПРЛ;</li>
+          <li>с депрессией без лечения у психиатра;</li>
+          <li>с химическими зависимостями;</li>
+          <li>с запросами, касающимися нарушения законов.</li>
+        </ul>
+      </div>
+    </div>
+  </Container>
+</Section>
+
+<style>
+  :global(.practice-boundaries) { background: var(--color-background); }
+  .practice-boundaries__layout { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(3rem, 7vw, 6rem); align-items: start; }
+  .practice-boundaries__layout h2 { margin-top: var(--space-4); }
+  .practice-boundaries__card { padding: clamp(1.5rem, 3vw, 2.5rem); border: 1px solid var(--color-border); border-radius: var(--radius-xl); background: var(--color-surface); }
+  .practice-boundaries__card p { font-weight: var(--font-weight-bold); }
+  .practice-boundaries__card ul { display: grid; gap: var(--space-3); margin: var(--space-4) 0 0; padding-left: 1.25rem; color: var(--color-text-secondary); }
+  @media (max-width: 52rem) { .practice-boundaries__layout { grid-template-columns: 1fr; } }
+</style>
