@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 
 export const GET: APIRoute = ({ site }) => {
-  const baseUrl = site ?? new URL('https://angelina-psychologist-site.pages.dev');
+  const baseUrl = site ?? new URL('https://angelinaglukhova.com');
   const body = [
     'User-agent: *',
     'Allow: /',
