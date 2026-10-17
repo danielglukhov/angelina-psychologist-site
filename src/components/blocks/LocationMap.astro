@@ -1,4 +1,6 @@
 ---
+import PriceDisplay from '../PriceDisplay.astro';
+import type { Service } from '../../config/prices';
 import Button from '../ui/Button.astro';
 
 interface Props {
@@ -9,7 +11,7 @@ interface Props {
   email?: string;
   format?: string;
   duration?: string;
-  price?: string;
+  service?: Service;
 }
 
 const {
@@ -20,7 +22,7 @@ const {
   email = 'angelina.glukhova.97@gmail.com',
   format = 'Отдельный кабинет',
   duration = '50 минут',
-  price = '$67',
+  service = 'batumi',
 } = Astro.props;
 ---
 
@@ -42,7 +44,7 @@ const {
       </div>
       <div>
         <dt>Стоимость</dt>
-        <dd>{price}</dd>
+        <dd><PriceDisplay service={service} /></dd>
       </div>
     </dl>
 

@@ -1,4 +1,6 @@
 ---
+import PriceDisplay from '../../components/PriceDisplay.astro';
+import TherapyCompletionNotice from '../../components/TherapyCompletionNotice.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Button from '../../components/ui/Button.astro';
 import Container from '../../components/ui/Container.astro';
@@ -17,7 +19,7 @@ const requests = [
 
 <BaseLayout
   title="Психолог в Батуми – очные консультации"
-  description="Очные консультации клинического психолога Ангелины Глуховой в психологическом центре Unbox в Батуми. 50 минут, стоимость $67."
+  description="Очные консультации клинического психолога Ангелины Глуховой в психологическом центре Unbox в Батуми. 50 минут, стоимость 200 GEL."
 >
   <Section class="service-hero">
     <Container>
@@ -39,12 +41,13 @@ const requests = [
         </div>
 
         <aside class="service-facts" aria-label="Условия очной консультации">
+          <div><span>Стоимость</span><strong><PriceDisplay service="batumi" /></strong></div>
           <div><span>Место</span><strong>Психологический центр Unbox</strong></div>
           <div><span>Формат</span><strong>Отдельный кабинет</strong></div>
           <div><span>Длительность</span><strong>50 минут</strong></div>
-          <div><span>Стоимость</span><strong>$67</strong></div>
         </aside>
       </div>
+      <TherapyCompletionNotice />
     </Container>
   </Section>
 

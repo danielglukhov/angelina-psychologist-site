@@ -1,4 +1,6 @@
 ---
+import PriceDisplay from '../../components/PriceDisplay.astro';
+import TherapyCompletionNotice from '../../components/TherapyCompletionNotice.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Button from '../../components/ui/Button.astro';
 import Container from '../../components/ui/Container.astro';
@@ -144,7 +146,7 @@ const faq = [
         <aside class="online-facts" aria-label="Условия онлайн-консультации">
           <div>
             <span>Стоимость</span>
-            <strong>$51</strong>
+            <strong><PriceDisplay service="online" /></strong>
           </div>
           <div>
             <span>Длительность</span>
@@ -160,6 +162,7 @@ const faq = [
           </div>
         </aside>
       </div>
+      <TherapyCompletionNotice />
     </Container>
   </Section>
 
