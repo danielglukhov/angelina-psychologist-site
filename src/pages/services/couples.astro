@@ -1,4 +1,6 @@
 ---
+import PriceDisplay from '../../components/PriceDisplay.astro';
+import TherapyCompletionNotice from '../../components/TherapyCompletionNotice.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Button from '../../components/ui/Button.astro';
 import Container from '../../components/ui/Container.astro';
@@ -110,7 +112,7 @@ const faq = [
         <aside class="couples-facts" aria-label="Условия консультации для пар">
           <div>
             <span>Стоимость</span>
-            <strong>$103</strong>
+            <strong><PriceDisplay service="couples" /></strong>
           </div>
           <div>
             <span>Длительность</span>
@@ -126,6 +128,7 @@ const faq = [
           </div>
         </aside>
       </div>
+      <TherapyCompletionNotice />
     </Container>
   </Section>
 
@@ -271,7 +274,7 @@ const faq = [
 
   <Section id="location" class="location-section">
     <Container>
-      <LocationMap format="Очно в Батуми" duration="80 минут" price="$103" />
+      <LocationMap format="Очно в Батуми" duration="80 минут" service="couples" />
     </Container>
   </Section>
 

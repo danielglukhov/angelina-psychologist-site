@@ -1,0 +1,31 @@
+---
+import { currencies, prices, formatPrice, type Service } from '../config/prices';
+interface Props { service: Service }
+const { service } = Astro.props;
+const price = prices[service];
+const id = 'currency-' + crypto.randomUUID();
+---
+<span class="price-display" data-price data-base={price.currency} data-amount={price.amount} style="font: inherit; color: inherit; letter-spacing: inherit; text-transform: none;">
+  <button type="button" class="price-trigger" aria-expanded="false" aria-controls={id} aria-label="Выбрать валюту отображения" disabled><span data-price-value>{formatPrice(price.amount, price.currency)}</span><span data-price-code hidden>{price.currency}</span></button>
+  <span id={id} class="currency-selector" popover="manual" hidden role="group" aria-label="Валюта отображения">
+    <span class="currency-selector__title">Показать стоимость в</span>
+    {currencies.map(code => <button type="button" data-currency={code} aria-pressed="false">{code}</button>)}
+    <span class="currency-selector__status" data-rate-status></span>
+    <span class="currency-selector__note">Валюту и способ оплаты согласуем при записи. <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener noreferrer">Курсы ExchangeRate-API</a>.</span>
+  </span>
+</span>
+<script>import '../scripts/currency';</script>
+<style>
+  .price-display { display: inline; }
+  .price-trigger { display: inline; margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent; color: inherit; font: inherit; letter-spacing: inherit; line-height: inherit; vertical-align: baseline; text-align: left; white-space: nowrap; cursor: pointer; }
+  .price-trigger:disabled { opacity: 1; cursor: default; }
+  .currency-selector { position: fixed; inset: auto; margin: 0; box-sizing: border-box; width: 17rem; max-width: calc(100vw - 24px); max-height: calc(100dvh - 24px); overflow-y: auto; padding: var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); color: var(--color-text-primary); box-shadow: var(--shadow-md); font: var(--font-weight-regular) var(--font-size-md)/var(--line-height-body) var(--font-family-base); letter-spacing: normal; text-transform: none; }
+  .currency-selector[hidden] { display: none; }
+  .currency-selector__title { display: block; margin-bottom: var(--space-2); font-weight: var(--font-weight-semibold); font-size: var(--font-size-sm); }
+  .currency-selector button { display: block; width: 100%; min-height: 2.75rem; padding: var(--space-2) var(--space-3); border: 0; border-radius: var(--radius-sm); font: inherit; text-align: left; background: transparent; color: inherit; cursor: pointer; }
+  .currency-selector button[aria-pressed="true"] { background: var(--color-accent-soft); }
+  .currency-selector button[aria-pressed="true"]::after { content: ' ✓'; }
+  .currency-selector button:hover { background: var(--color-surface-muted); }
+  .currency-selector button:disabled { opacity: .45; cursor: default; }
+  .currency-selector__status, .currency-selector__note { display: block; margin-top: var(--space-3); color: var(--color-text-secondary); font-size: var(--font-size-xs); line-height: 1.5; }
+</style>

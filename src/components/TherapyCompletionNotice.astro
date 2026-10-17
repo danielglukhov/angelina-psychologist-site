@@ -1,0 +1,47 @@
+  <details class="therapy-completion">
+    <summary><span class="therapy-completion__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="9" /><path d="M12 7v6m0 4h.01" /></svg></span><span class="therapy-completion__label">Важная информация о завершении терапии</span><svg class="therapy-completion__chevron" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="m5 7 5 5 5-5" /></svg></summary>
+    <div class="therapy-completion__content">
+      <p><strong>Пожалуйста, обратите внимание: продолжение терапии предполагает оплату последней сессии заранее.</strong></p>
+<p>Завершающая встреча является важным этапом терапии. Она помогает подвести итоги, попрощаться и присвоить полученный опыт. Кроме того, в процессе терапии иногда возникает желание всё бросить, раздражение на терапевта или другие реакции, связанные с происходящими изменениями. Такие моменты важно иметь возможность обсудить и понять, прежде чем принимать решение о завершении.</p>
+<p>Моя задача на завершающей сессии – не убедить вас остаться, а помочь вам разобраться в происходящем и завершить терапию так, как будет подходить именно вам.</p>
+    </div>
+  </details>
+<style>
+  .therapy-completion { --notice-background: var(--color-surface); --notice-border: var(--color-border); --notice-text: var(--color-text-primary); --notice-heading: var(--color-text-primary); --notice-icon: var(--color-accent); margin-top: var(--space-10); border: 1px solid var(--notice-border); border-radius: var(--radius-xl); background: var(--notice-background); box-shadow: var(--shadow-md); }
+  .therapy-completion summary { display: flex; align-items: center; gap: var(--space-4); min-height: 80px; padding: var(--space-5) var(--space-6); list-style: none; cursor: pointer; color: var(--notice-heading); font-weight: var(--font-weight-semibold); }
+  .therapy-completion summary::-webkit-details-marker { display: none; }
+  .therapy-completion__label { flex: 1; min-width: 0; max-height: 8em; overflow: hidden; transition: opacity 160ms ease, max-height var(--duration-normal) ease; }
+  .therapy-completion__icon { display: flex; align-items: center; justify-content: center; flex: 0 0 38px; height: 38px; border-radius: 50%; background: var(--color-accent-soft); color: var(--notice-icon); }
+  .therapy-completion svg { display: block; }
+  .therapy-completion svg path, .therapy-completion svg circle { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .therapy-completion__chevron { flex: 0 0 20px; color: var(--notice-icon); transition: transform var(--duration-normal); }
+  .therapy-completion[open] .therapy-completion__chevron { transform: rotate(180deg); }
+  .therapy-completion__content { max-width: calc(74ch + 110px); padding: 0 var(--space-8) var(--space-6) 78px; color: var(--notice-text); }
+  .therapy-completion__content p + p { margin-top: var(--space-4); }
+  .therapy-completion__content strong { color: var(--notice-heading); }
+  .therapy-completion { position: relative; }
+  .therapy-completion summary { padding-left: 78px; padding-right: 68px; transition: min-height var(--duration-normal) ease, padding-block var(--duration-normal) ease; }
+  .therapy-completion__icon { position: absolute; top: 21px; left: 24px; width: 38px; }
+  .therapy-completion__chevron { position: absolute; z-index: 3; top: 30px; right: 24px; }
+  .therapy-completion summary::after { content: ''; position: absolute; z-index: 2; top: 18px; right: 12px; width: 44px; height: 44px; border-radius: var(--radius-sm); }
+  .therapy-completion[open] summary { min-height: 0; padding-block: 0; }
+  .therapy-completion[open] .therapy-completion__label { opacity: 0; max-height: 0; }
+  .therapy-completion[open] summary:focus-visible { outline: none; }
+  .therapy-completion[open] summary:focus-visible::after { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+  .therapy-completion__content { padding-top: 0; padding-right: 68px; transition: padding-top var(--duration-normal) ease; }
+  .therapy-completion[open] .therapy-completion__content { padding-top: 24px; }
+  @supports (interpolate-size: allow-keywords) {
+    .therapy-completion { interpolate-size: allow-keywords; }
+    .therapy-completion::details-content { height: 0; overflow: clip; transition: height var(--duration-normal) ease, content-visibility var(--duration-normal) allow-discrete; }
+    .therapy-completion[open]::details-content { height: auto; }
+  }
+  @media (max-width: 40rem) {
+    .therapy-completion { margin-top: var(--space-8); }
+    .therapy-completion summary { gap: var(--space-3); padding: var(--space-4) 60px var(--space-4) 66px; }
+    .therapy-completion__icon { left: 16px; }
+    .therapy-completion__chevron { right: 20px; }
+    .therapy-completion__content { padding: 0 var(--space-5) var(--space-5); }
+    .therapy-completion__content > p:first-child { padding-left: 46px; padding-right: 40px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .therapy-completion summary, .therapy-completion__label, .therapy-completion__content, .therapy-completion__chevron, .therapy-completion::details-content { transition: none; } }
+</style>
